@@ -1,0 +1,10 @@
+Generic single-database configuration with async support.
+
+Run migrations:
+  alembic upgrade head
+
+Create a new migration:
+  alembic revision --autogenerate -m "your description"
+
+Rollback one step:
+  alembic downgrade -1
