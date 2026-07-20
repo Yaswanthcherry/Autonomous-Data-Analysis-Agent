@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from core.database import get_db
@@ -6,7 +6,7 @@ from core.dependencies import get_current_user
 from models.user import User
 from models.dataset import Dataset
 from models.analysis import AnalysisJob, AnalysisResult, Chart, MLModel
-from tasks.inline_pipeline import run_pipeline_inline
+from tasks.pipeline import run_analysis_pipeline
 import uuid
 
 router = APIRouter()
@@ -15,7 +15,6 @@ router = APIRouter()
 @router.post("/{dataset_id}/start", status_code=202)
 async def start_analysis(
     dataset_id: str,
-    background_tasks: BackgroundTasks,
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -36,11 +35,8 @@ async def start_analysis(
     await db.commit()
     await db.refresh(job)
 
-    # Run pipeline as FastAPI background task (no Celery/Redis needed)
-    background_tasks.add_task(
-        run_pipeline_inline,
-        job.id, dataset_id, dataset.file_path, dataset.file_type
-    )
+    # Trigger Celery task
+    run_analysis_pipeline.delay(job.id, dataset_id, dataset.file_path, dataset.file_type)
 
     return {"job_id": job.id, "status": "pending"}
 

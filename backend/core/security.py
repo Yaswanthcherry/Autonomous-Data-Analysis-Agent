@@ -5,18 +5,17 @@ from passlib.context import CryptContext
 from fastapi import HTTPException, status
 from core.config import settings
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
 
 ALGORITHM = "HS256"
 
 
-def hash_password(password: str) -> str:
+def hash_password(password: str):
     return pwd_context.hash(password)
 
 
-def verify_password(plain: str, hashed: str) -> bool:
-    return pwd_context.verify(plain, hashed)
-
+def verify_password(password: str, hashed: str):
+    return pwd_context.verify(password, hashed)
 
 def create_access_token(subject: str, role: str) -> str:
     expire = datetime.now(timezone.utc) + timedelta(

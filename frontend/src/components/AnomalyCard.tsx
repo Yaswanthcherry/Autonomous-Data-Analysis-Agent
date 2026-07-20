@@ -40,11 +40,18 @@ export function AnomalyCard({ anomalies }: { anomalies: AnomalyData }) {
 
       {/* Isolation Forest summary */}
       {ifResult && (
-        <div className={`rounded-lg px-4 py-3 mb-4 flex items-center justify-between ${
-          ifResult.count === 0 ? "bg-green-50 text-green-700" : "bg-orange-50 text-orange-700"
-        }`}>
-          <span className="text-sm font-medium">Isolation Forest anomalies</span>
-          <span className="font-bold text-lg">{ifResult.count}
+        <div
+          className={`rounded-lg px-4 py-3 mb-4 flex items-center justify-between ${
+            ifResult.count === 0
+              ? "bg-green-50 text-green-700"
+              : "bg-orange-50 text-orange-700"
+          }`}
+        >
+          <span className="text-sm font-medium">
+            Isolation Forest anomalies
+          </span>
+          <span className="font-bold text-lg">
+            {ifResult.count}
             <span className="text-xs font-normal ml-1">({ifResult.pct}%)</span>
           </span>
         </div>
@@ -59,7 +66,12 @@ export function AnomalyCard({ anomalies }: { anomalies: AnomalyData }) {
           <div className="space-y-2">
             {iqrEntries.map(([col, info]) => (
               <div key={col} className="flex items-center gap-3">
-                <span className="text-xs text-gray-700 w-36 truncate" title={col}>{col}</span>
+                <span
+                  className="text-xs text-gray-700 w-36 truncate"
+                  title={col}
+                >
+                  {col}
+                </span>
                 <div className="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-red-400 rounded-full"
@@ -76,7 +88,9 @@ export function AnomalyCard({ anomalies }: { anomalies: AnomalyData }) {
       )}
 
       {iqrEntries.length === 0 && ifResult?.count === 0 && (
-        <p className="text-sm text-green-600 font-medium">✓ No significant outliers detected</p>
+        <p className="text-sm text-green-600 font-medium">
+          ✓ No significant outliers detected
+        </p>
       )}
     </div>
   );

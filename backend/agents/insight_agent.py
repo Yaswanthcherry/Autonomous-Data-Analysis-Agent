@@ -28,30 +28,45 @@ class InsightAgent:
                  model_results: list, input_: InsightInput) -> InsightOutput:
         logger.info(f"[{input_.job_id[:8]}] InsightAgent generating AI insights")
 
-        # Use existing service for core logic
-        ai_service = AIService()
+        try:
+            # Use existing service for core logic
+            ai_service = AIService()
 
-        # Generate all insights (async operations)
-        import asyncio
+            # Generate all insights (async operations)
+            import asyncio
 
-        async def _generate_all():
-            findings = await ai_service.explain_findings(profile, cleaning, anomalies)
-            feature_recs = await ai_service.recommend_features(eda, profile)
-            business_insights = await ai_service.generate_business_insights(eda, model_results)
-            executive_summary = await ai_service.generate_executive_summary(
-                profile, eda, model_results, findings, business_insights
+            async def _generate_all():
+                findings = await ai_service.explain_findings(profile, cleaning, anomalies)
+                feature_recs = await ai_service.recommend_features(eda, profile)
+                business_insights = await ai_service.generate_business_insights(eda, model_results)
+                executive_summary = await ai_service.generate_executive_summary(
+                    profile, eda, model_results, findings, business_insights
+                )
+                return findings, feature_recs, business_insights, executive_summary
+
+            # Safe async execution in sync context
+            try:
+                loop = asyncio.get_event_loop()
+                if loop.is_running():
+                    import concurrent.futures
+                    with concurrent.futures.ThreadPoolExecutor() as pool:
+                        future = pool.submit(asyncio.run, _generate_all())
+                        findings, feature_recs, business_insights, executive_summary = future.result()
+                else:
+                    findings, feature_recs, business_insights, executive_summary = loop.run_until_complete(_generate_all())
+            except RuntimeError:
+                findings, feature_recs, business_insights, executive_summary = asyncio.run(_generate_all())
+
+            output = InsightOutput(
+                job_id=input_.job_id,
+                findings=findings,
+                feature_recommendations=feature_recs,
+                business_insights=business_insights,
+                executive_summary=executive_summary,
             )
-            return findings, feature_recs, business_insights, executive_summary
 
-        findings, feature_recs, business_insights, executive_summary = asyncio.run(_generate_all())
-
-        output = InsightOutput(
-            job_id=input_.job_id,
-            findings=findings,
-            feature_recommendations=feature_recs,
-            business_insights=business_insights,
-            executive_summary=executive_summary,
-        )
-
-        logger.info(f"[{input_.job_id[:8]}] Insights generated: {len(executive_summary)} chars summary")
-        return output
+            logger.info(f"[{input_.job_id[:8]}] Insights generated: {len(executive_summary)} chars summary")
+            return output
+        except Exception as e:
+            logger.error(f"[{input_.job_id[:8]}] InsightAgent failed: {e}")
+            raise

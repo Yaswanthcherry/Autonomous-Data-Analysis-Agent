@@ -24,9 +24,6 @@ def setup_logging():
         "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
         "<level>{level: <8}</level> | "
         "<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> | "
-        "<magenta>trace:{extra[trace_id]}</magenta> | "
-        "<magenta>span:{extra[span_id]}</magenta> | "
-        "<magenta>job:{extra[job_id]}</magenta> | "
         "<level>{message}</level>"
     )
     logger.add(

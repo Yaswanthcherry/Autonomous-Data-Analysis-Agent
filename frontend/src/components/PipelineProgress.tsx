@@ -1,17 +1,17 @@
 "use client";
 
 const STAGES = [
+  { key: "loading", label: "Loading" },
+  { key: "planning", label: "Planning" },
   { key: "profiling", label: "Profiling" },
   { key: "cleaning", label: "Cleaning" },
   { key: "anomaly_detection", label: "Anomalies" },
   { key: "eda", label: "EDA" },
   { key: "chart_generation", label: "Charts" },
-  { key: "ai_findings", label: "AI Findings" },
-  { key: "feature_recommendations", label: "Features" },
+  { key: "ai_insights", label: "AI Insights" },
   { key: "model_training", label: "Training" },
   { key: "model_comparison", label: "Comparing" },
   { key: "business_insights", label: "Insights" },
-  { key: "executive_summary", label: "Summary" },
   { key: "pdf_export", label: "PDF" },
   { key: "complete", label: "Done" },
 ];
