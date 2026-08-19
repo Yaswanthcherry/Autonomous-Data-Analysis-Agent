@@ -41,7 +41,7 @@ class EDAAgent:
             correlation_matrix=eda_dict["correlation_matrix"],
             skewed_columns=eda_dict["skewed_columns"],
             high_cardinality_columns=eda_dict["high_cardinality_columns"],
-            class_balance=eda_dict["class_balance"],
+            class_balance={str(k): v for k, v in eda_dict["class_balance"].items()},
         )
 
         logger.info(f"[{input_.job_id[:8]}] EDA complete: task={output.task_type}, target={output.target_candidate}")

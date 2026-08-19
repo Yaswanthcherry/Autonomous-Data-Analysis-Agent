@@ -8,13 +8,13 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
-    DATABASE_URL: str = "sqlite+aiosqlite:///./analyst.db"
+    DATABASE_URL: str = "sqlite+aiosqlite:////home/yaswanth/ai-analyst-data/analyst.db"
     REDIS_URL: str = "redis://localhost:6379/0"
     CELERY_BROKER_URL: str = "redis://localhost:6379/0"
     CELERY_RESULT_BACKEND: str = "redis://localhost:6379/1"
 
-    OPENAI_API_KEY: str = "sk-placeholder"
-    OPENAI_MODEL: str = "gpt-4o"
+    GROQ_API_KEY: str = ""
+    GROQ_MODEL: str = "llama-3.3-70b-versatile"
 
     UPLOAD_DIR: str = "./uploads"
     MAX_UPLOAD_SIZE_MB: int = 100

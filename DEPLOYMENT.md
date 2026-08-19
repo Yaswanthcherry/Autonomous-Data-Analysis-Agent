@@ -1,549 +1,781 @@
-# Deployment Guide
+# Deployment Guide - AI Data Analyst Agent
 
-This guide covers deploying the AI Data Analyst Agent to production using Docker, PostgreSQL, Nginx, and CI/CD.
+## 📋 Deployment Phases
 
-## Table of Contents
+### Phase 1: Development (COMPLETE ✅)
+- SQLite database
+- In-memory task execution
+- Single process
+- Hot reload enabled
 
-1. [Prerequisites](#prerequisites)
-2. [Environment Configuration](#environment-configuration)
-3. [Local Deployment](#local-deployment)
-4. [Production Deployment](#production-deployment)
-5. [CI/CD Pipeline](#cicd-pipeline)
-6. [Monitoring & Health Checks](#monitoring--health-checks)
-7. [Troubleshooting](#troubleshooting)
-8. [Scaling Considerations](#scaling-considerations)
+### Phase 2: Local Production (READY FOR IMPLEMENTATION)
+- Docker containerization
+- Docker Compose orchestration
+- PostgreSQL database
+- Redis cache
+- Celery workers
+- Nginx reverse proxy
 
-## Prerequisites
+### Phase 3: Cloud Deployment (FUTURE)
+- Kubernetes orchestration
+- AWS/GCP/Azure integration
+- Load balancing
+- Auto-scaling
+- CDN for static assets
 
-### Required Software
+---
 
-- **Docker**: 20.10+
-- **Docker Compose**: 2.0+
-- **Git**: For cloning the repository
-- **OpenAI API Key**: Required for AI analysis features
+## 🚀 Phase 2: Local Production Setup
 
-### System Requirements
+### Prerequisites
+- Docker Desktop installed (Windows/Mac) or Docker Engine (Linux)
+- Docker Compose v2.0+
+- Git
+- 8GB RAM minimum, 4+ CPU cores
 
-- **Minimum**: 2 CPU cores, 4GB RAM, 20GB disk
-- **Recommended**: 4 CPU cores, 8GB RAM, 50GB disk
-- **Production**: 8+ CPU cores, 16GB+ RAM, 100GB+ disk with SSD
+### Step 1: Prepare Environment Files
 
-## Environment Configuration
-
-### 1. Clone the Repository
-
+#### Backend `.env` (from `.env.example`)
 ```bash
-git clone <your-repo-url>
-cd analysis-agent
-```
+# Database
+DATABASE_URL=postgresql+psycopg2://analyst:password@postgres:5432/analyst_db
 
-### 2. Configure Environment Variables
-
-```bash
-cp .env.example .env
-```
-
-Edit `.env` with your production values:
-
-```bash
-# ─── App ───────────────────────────────────────────────
-APP_ENV=production
-SECRET_KEY=<generate-a-long-random-secret-key>
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-REFRESH_TOKEN_EXPIRE_DAYS=7
-
-# ─── Database ──────────────────────────────────────────
-POSTGRES_HOST=postgres
-POSTGRES_PORT=5432
-POSTGRES_DB=ai_analyst
-POSTGRES_USER=<secure-username>
-POSTGRES_PASSWORD=<secure-password>
-DATABASE_URL=postgresql+asyncpg://<user>:<password>@postgres:5432/ai_analyst
-
-# ─── Redis ─────────────────────────────────────────────
+# Redis
 REDIS_URL=redis://redis:6379/0
-CELERY_BROKER_URL=redis://redis:6379/0
-CELERY_RESULT_BACKEND=redis://redis:6379/1
 
-# ─── OpenAI ────────────────────────────────────────────
-OPENAI_API_KEY=sk-your-actual-openai-key
-OPENAI_MODEL=gpt-4o
+# API Keys
+OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
 
-# ─── File Storage ──────────────────────────────────────
+# JWT
+JWT_SECRET_KEY=your-secret-key-at-least-32-characters
+
+# Upload
 UPLOAD_DIR=/app/uploads
-MAX_UPLOAD_SIZE_MB=100
 
-# ─── Frontend ──────────────────────────────────────────
-NEXT_PUBLIC_API_URL=https://your-domain.com
-NEXTAUTH_SECRET=<generate-nextauth-secret>
-NEXTAUTH_URL=https://your-domain.com
+# Logging
+LOG_LEVEL=INFO
 ```
 
-### Security Notes
-
-- **Never commit `.env` to version control**
-- Use strong, randomly generated secrets (32+ characters)
-- Rotate secrets regularly in production
-- Use environment-specific API keys
-
-## Local Deployment
-
-### Quick Start
-
+#### Frontend `.env.local`
 ```bash
-# Start all services
-docker-compose up -d
-
-# Run database migrations
-docker-compose exec backend alembic upgrade head
-
-# Check service health
-docker-compose ps
+NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
 ```
 
-### Access Points
+### Step 2: Create Docker Compose File
 
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8000
-- **API Documentation**: http://localhost:8000/docs
-- **Nginx Reverse Proxy**: http://localhost
-
-### Development Mode
-
-For hot-reload during development:
-
-```bash
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
-```
-
-### Stopping Services
-
-```bash
-docker-compose down
-```
-
-To remove volumes (WARNING: deletes data):
-
-```bash
-docker-compose down -v
-```
-
-## Production Deployment
-
-### 1. Server Setup
-
-#### Ubuntu/Debian
-
-```bash
-# Update system
-sudo apt update && sudo apt upgrade -y
-
-# Install Docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-
-# Install Docker Compose
-sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-
-# Add user to docker group
-sudo usermod -aG docker $USER
-```
-
-#### Firewall Configuration
-
-```bash
-# Allow HTTP/HTTPS
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-sudo ufw allow 22/tcp
-sudo ufw enable
-```
-
-### 2. SSL/TLS Setup with Let's Encrypt
-
-```bash
-# Install Certbot
-sudo apt install certbot python3-certbot-nginx -y
-
-# Obtain certificate
-sudo certbot --nginx -d your-domain.com
-
-# Auto-renewal (configured automatically)
-sudo certbot renew --dry-run
-```
-
-### 3. Configure Nginx
-
-Update `nginx/nginx.conf` for production:
-
-```nginx
-server {
-    listen 80;
-    server_name your-domain.com;
-    return 301 https://$server_name$request_uri;
-}
-
-server {
-    listen 443 ssl http2;
-    server_name your-domain.com;
-
-    ssl_certificate /etc/letsencrypt/live/your-domain.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/your-domain.com/privkey.pem;
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers HIGH:!aNULL:!MD5;
-
-    # Frontend
-    location / {
-        proxy_pass http://frontend:3000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-
-    # Backend API
-    location /api/ {
-        proxy_pass http://backend:8000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-
-    # Health checks
-    location /health {
-        proxy_pass http://backend:8000;
-        access_log off;
-    }
-}
-```
-
-### 4. Deploy with Docker Compose
-
-```bash
-# Clone repository
-git clone <your-repo-url>
-cd analysis-agent
-
-# Configure environment
-cp .env.example .env
-nano .env  # Edit with production values
-
-# Start services
-docker-compose up -d
-
-# Run migrations
-docker-compose exec backend alembic upgrade head
-
-# Create admin user
-docker-compose exec backend python scripts/create_admin.py
-```
-
-### 5. Verify Deployment
-
-```bash
-# Check all services are running
-docker-compose ps
-
-# Check backend health
-curl http://localhost/health/ready
-
-# Check frontend
-curl http://localhost/
-
-# View logs
-docker-compose logs -f
-```
-
-## CI/CD Pipeline
-
-### GitHub Actions Setup
-
-The project includes CI/CD workflows in `.github/workflows/`:
-
-- **ci.yml**: Runs tests on every push/PR
-- **deploy.yml**: Deploys to production on main branch pushes
-
-### Required GitHub Secrets
-
-Configure these in your repository settings:
-
-```
-DOCKER_USERNAME          # Docker Hub username
-DOCKER_PASSWORD          # Docker Hub password/token
-PRODUCTION_HOST          # Production server hostname
-PRODUCTION_USER          # SSH username for server
-SSH_PRIVATE_KEY          # SSH private key for server access
-```
-
-### Deployment Workflow
-
-1. **Push to main branch** triggers CI tests
-2. **Tests pass** → Build Docker images
-3. **Push images** to Docker Hub
-4. **SSH to production server**
-5. **Pull latest images**
-6. **Restart services**
-7. **Run database migrations**
-
-### Manual Deployment
-
-```bash
-# Build images locally
-docker-compose build
-
-# Push to registry
-docker push your-username/ai-analyst-backend:latest
-docker push your-username/ai-analyst-frontend:latest
-
-# Deploy on server
-ssh user@production-server
-cd /opt/ai-analyst
-docker-compose pull
-docker-compose up -d
-docker-compose exec backend alembic upgrade head
-```
-
-## Monitoring & Health Checks
-
-### Health Endpoints
-
-The backend provides three health endpoints:
-
-- **`/health`**: Basic health check
-  ```json
-  {"status": "ok", "version": "1.0.0"}
-  ```
-
-- **`/health/ready`**: Readiness check (database + Redis)
-  ```json
-  {"status": "ready", "checks": {"database": "ok", "redis": "ok"}}
-  ```
-
-- **`/health/live`**: Liveness check
-  ```json
-  {"status": "alive", "timestamp": "2024-01-01T00:00:00Z"}
-  ```
-
-### Monitoring Logs
-
-```bash
-# View all logs
-docker-compose logs -f
-
-# View specific service logs
-docker-compose logs -f backend
-docker-compose logs -f celery_worker
-
-# View last 100 lines
-docker-compose logs --tail=100 backend
-```
-
-### Log Files
-
-Logs are stored in `backend/logs/`:
-- **app.log**: Application logs (JSON format, rotated)
-- **Retention**: 30 days with compression
-
-### Metrics Collection
-
-For production monitoring, consider integrating:
-
-- **Prometheus**: For metrics collection
-- **Grafana**: For visualization
-- **Sentry**: For error tracking
-- **Datadog/New Relic**: For APM
-
-Example Prometheus configuration:
+**File**: `docker-compose.prod.yml`
 
 ```yaml
-scrape_configs:
-  - job_name: 'ai-analyst'
-    static_configs:
-      - targets: ['backend:8000']
-    metrics_path: '/metrics'
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: analyst_postgres
+    environment:
+      POSTGRES_USER: analyst
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: analyst_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U analyst"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - analyst_network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: analyst_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - analyst_network
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: analyst_backend
+    environment:
+      - DATABASE_URL=postgresql+psycopg2://analyst:password@postgres:5432/analyst_db
+      - REDIS_URL=redis://redis:6379/0
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - UPLOAD_DIR=/app/uploads
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/logs:/app/logs
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - analyst_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Celery Worker (optional, for production scaling)
+  celery_worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: analyst_celery
+    command: celery -A tasks.celery_app worker --loglevel=info --concurrency=2
+    environment:
+      - DATABASE_URL=postgresql+psycopg2://analyst:password@postgres:5432/analyst_db
+      - REDIS_URL=redis://redis:6379/0
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - UPLOAD_DIR=/app/uploads
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/logs:/app/logs
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - analyst_network
+    deploy:
+      replicas: 1  # Scale this up for high throughput
+
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: analyst_frontend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - analyst_network
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: analyst_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro  # For HTTPS
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - analyst_network
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  analyst_network:
+    driver: bridge
 ```
 
-## Troubleshooting
+### Step 3: Create Backend Dockerfile
 
-### Common Issues
+**File**: `backend/Dockerfile`
 
-#### 1. Database Connection Failed
+```dockerfile
+FROM python:3.11-slim
 
-```bash
-# Check PostgreSQL is running
-docker-compose ps postgres
+WORKDIR /app
 
-# Check PostgreSQL logs
-docker-compose logs postgres
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# Restart database
-docker-compose restart postgres
+# Copy requirements
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application
+COPY . .
+
+# Create directories
+RUN mkdir -p /app/uploads /app/logs
+
+# Expose port
+EXPOSE 8000
+
+# Run Uvicorn
+CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-#### 2. Redis Connection Failed
+### Step 4: Create Frontend Dockerfile
 
-```bash
-# Check Redis is running
-docker-compose ps redis
+**File**: `frontend/Dockerfile`
 
-# Check Redis logs
-docker-compose logs redis
+```dockerfile
+FROM node:20-alpine AS builder
 
-# Test Redis connection
-docker-compose exec redis redis-cli ping
+WORKDIR /app
+
+# Install dependencies
+COPY package.json package-lock.json ./
+RUN npm ci
+
+# Build application
+COPY . .
+RUN npm run build
+
+# Production stage
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install dependencies for production
+COPY package.json package-lock.json ./
+RUN npm ci --only=production
+
+# Copy built files from builder
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+
+# Expose port
+EXPOSE 3000
+
+# Run Next.js
+CMD ["npm", "start"]
 ```
 
-#### 3. Celery Worker Not Processing Tasks
+### Step 5: Create Nginx Configuration
 
-```bash
-# Check worker status
-docker-compose ps celery_worker
+**File**: `nginx.conf`
 
-# View worker logs
-docker-compose logs celery_worker
+```nginx
+user nginx;
+worker_processes auto;
+error_log /var/log/nginx/error.log warn;
+pid /var/run/nginx.pid;
 
-# Restart worker
-docker-compose restart celery_worker
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                    '$status $body_bytes_sent "$http_referer" '
+                    '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log /var/log/nginx/access.log main;
+
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    types_hash_max_size 2048;
+    client_max_body_size 100M;
+
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1000;
+    gzip_types text/plain text/css text/xml text/javascript 
+               application/x-javascript application/xml+rss 
+               application/json application/javascript;
+
+    # Backend upstream
+    upstream backend {
+        server backend:8000;
+    }
+
+    # Frontend upstream
+    upstream frontend {
+        server frontend:3000;
+    }
+
+    server {
+        listen 80;
+        server_name _;
+
+        # Frontend static files
+        location / {
+            proxy_pass http://frontend;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+
+        # API backend
+        location /api/ {
+            proxy_pass http://backend;
+            proxy_http_version 1.1;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_redirect off;
+        }
+
+        # Health check endpoint
+        location /health {
+            proxy_pass http://backend;
+        }
+
+        # API documentation
+        location /docs {
+            proxy_pass http://backend;
+            proxy_set_header Host $host;
+        }
+
+        location /redoc {
+            proxy_pass http://backend;
+            proxy_set_header Host $host;
+        }
+    }
+
+    # HTTPS configuration (uncomment after SSL setup)
+    # server {
+    #     listen 443 ssl http2;
+    #     server_name your-domain.com;
+    #
+    #     ssl_certificate /etc/nginx/ssl/cert.pem;
+    #     ssl_certificate_key /etc/nginx/ssl/key.pem;
+    #
+    #     ssl_protocols TLSv1.2 TLSv1.3;
+    #     ssl_ciphers HIGH:!aNULL:!MD5;
+    #
+    #     # ... rest of configuration same as above ...
+    # }
+    #
+    # # Redirect HTTP to HTTPS
+    # server {
+    #     listen 80;
+    #     server_name your-domain.com;
+    #     return 301 https://$server_name$request_uri;
+    # }
+}
 ```
 
-#### 4. OpenAI API Errors
+### Step 6: Run Docker Compose
 
 ```bash
-# Verify API key is set
-docker-compose exec backend env | grep OPENAI_API_KEY
+# Set environment variables
+export OPENAI_API_KEY=sk-xxxxxxxxxxxx
+export JWT_SECRET_KEY=your-secret-key-32-chars-min
 
-# Check API quota
-# Visit: https://platform.openai.com/usage
+# Build and start services
+docker-compose -f docker-compose.prod.yml up -d
 
-# Test API connection
-docker-compose exec backend python -c "from openai import OpenAI; client = OpenAI(); print(client.models.list())"
-```
+# Check status
+docker-compose -f docker-compose.prod.yml ps
 
-#### 5. Nginx 502 Bad Gateway
+# View logs
+docker-compose -f docker-compose.prod.yml logs -f backend
 
-```bash
-# Check backend is running
-docker-compose ps backend
-
-# Check backend health
-curl http://localhost:8000/health
-
-# Check Nginx configuration
-docker-compose exec nginx nginx -t
-
-# Reload Nginx
-docker-compose exec nginx nginx -s reload
-```
-
-### Database Migrations
-
-```bash
-# Check current migration version
-docker-compose exec backend alembic current
-
-# Upgrade to latest
-docker-compose exec backend alembic upgrade head
-
-# Rollback one step
-docker-compose exec backend alembic downgrade -1
-
-# Create new migration
-docker-compose exec backend alembic revision --autogenerate -m "description"
-```
-
-### Reset Application Data
-
-**WARNING**: This deletes all data
-
-```bash
 # Stop services
-docker-compose down
-
-# Remove volumes
-docker-compose down -v
-
-# Restart
-docker-compose up -d
-docker-compose exec backend alembic upgrade head
+docker-compose -f docker-compose.prod.yml down
 ```
 
-## Scaling Considerations
+### Step 7: Database Migration
+
+```bash
+# Run migrations (automatic on startup)
+docker-compose -f docker-compose.prod.yml exec backend \
+  alembic upgrade head
+
+# Create admin user
+docker-compose -f docker-compose.prod.yml exec backend \
+  python scripts/create_admin.py
+```
+
+---
+
+## ☁️ Cloud Deployment (AWS Example)
+
+### Option 1: Elastic Container Service (ECS)
+
+#### Infrastructure as Code (Terraform)
+```hcl
+# infrastructure/main.tf
+
+provider "aws" {
+  region = "us-east-1"
+}
+
+# VPC
+resource "aws_vpc" "main" {
+  cidr_block = "10.0.0.0/16"
+}
+
+# RDS PostgreSQL
+resource "aws_db_instance" "postgres" {
+  allocated_storage    = 20
+  engine              = "postgres"
+  engine_version      = "15.0"
+  instance_class      = "db.t3.micro"
+  db_name             = "analyst_db"
+  username            = "analyst"
+  password            = random_password.db_password.result
+  skip_final_snapshot = false
+}
+
+# ElastiCache Redis
+resource "aws_elasticache_cluster" "redis" {
+  cluster_id           = "analyst-redis"
+  engine              = "redis"
+  node_type           = "cache.t3.micro"
+  num_cache_nodes     = 1
+  parameter_group_name = "default.redis7"
+  engine_version      = "7.0"
+}
+
+# ECS Cluster
+resource "aws_ecs_cluster" "main" {
+  name = "analyst-cluster"
+}
+
+# Application Load Balancer
+resource "aws_lb" "main" {
+  name               = "analyst-alb"
+  internal           = false
+  load_balancer_type = "application"
+  subnets            = aws_subnet.main[*].id
+}
+
+# ECS Services, Task Definitions, etc.
+```
+
+#### Deploy with AWS CLI
+```bash
+# Build and push Docker images
+aws ecr get-login-password --region us-east-1 | \
+  docker login --username AWS --password-stdin 123456789.dkr.ecr.us-east-1.amazonaws.com
+
+docker build -t analyst-backend:latest ./backend
+docker tag analyst-backend:latest 123456789.dkr.ecr.us-east-1.amazonaws.com/analyst-backend:latest
+docker push 123456789.dkr.ecr.us-east-1.amazonaws.com/analyst-backend:latest
+
+# Deploy with ECS
+aws ecs create-service \
+  --cluster analyst-cluster \
+  --service-name analyst-backend \
+  --task-definition analyst-backend:1 \
+  --desired-count 2 \
+  --launch-type FARGATE
+```
+
+### Option 2: Kubernetes
+
+#### Helm Chart Structure
+```
+analyst-helm-chart/
+├── Chart.yaml
+├── values.yaml
+├── templates/
+│   ├── backend-deployment.yaml
+│   ├── frontend-deployment.yaml
+│   ├── postgres-statefulset.yaml
+│   ├── redis-deployment.yaml
+│   ├── nginx-configmap.yaml
+│   ├── service.yaml
+│   └── ingress.yaml
+```
+
+#### Deploy with Helm
+```bash
+# Add Helm repository
+helm repo add analyst-repo https://charts.example.com
+
+# Install release
+helm install analyst analyst-repo/analyst-agent \
+  --namespace production \
+  --values values-prod.yaml
+
+# Upgrade release
+helm upgrade analyst analyst-repo/analyst-agent \
+  --namespace production \
+  --values values-prod.yaml
+```
+
+---
+
+## 🔒 Security Best Practices
+
+### 1. Environment Variables
+```bash
+# Never commit .env files
+echo ".env" >> .gitignore
+
+# Use AWS Secrets Manager or similar
+aws secretsmanager create-secret \
+  --name analyst/api-keys \
+  --secret-string '{"OPENAI_API_KEY":"..."}'
+```
+
+### 2. Database Security
+```sql
+-- Restrict database access
+CREATE USER analyst WITH PASSWORD 'strong-random-password';
+GRANT CONNECT ON DATABASE analyst_db TO analyst;
+
+-- Enable SSL
+ssl = on
+ssl_cert_file = '/etc/postgresql/server.crt'
+ssl_key_file = '/etc/postgresql/server.key'
+```
+
+### 3. API Security
+```yaml
+# Nginx: Rate limiting
+limit_req_zone $binary_remote_addr zone=api_limit:10m rate=10r/s;
+location /api/ {
+    limit_req zone=api_limit burst=20 nodelay;
+}
+
+# Nginx: DDoS protection
+limit_conn_zone $binary_remote_addr zone=addr:10m;
+limit_conn addr 100;
+```
+
+### 4. TLS/SSL
+```bash
+# Generate self-signed certificate (testing)
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
+
+# Use Let's Encrypt (production)
+certbot certonly --standalone -d your-domain.com
+```
+
+### 5. Backup Strategy
+```bash
+# Automated PostgreSQL backups
+pg_dump analyst_db > backup_$(date +%Y%m%d).sql
+
+# S3 backup with lifecycle
+aws s3 cp backup_*.sql s3://analyst-backups/
+aws s3api put-bucket-lifecycle-configuration \
+  --bucket analyst-backups \
+  --lifecycle-configuration file://lifecycle.json
+```
+
+---
+
+## 📊 Monitoring & Logging
+
+### Application Monitoring
+```yaml
+# prometheus.yml
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'analyst-backend'
+    static_configs:
+      - targets: ['localhost:8000']
+
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['localhost:5432']
+```
+
+### Log Aggregation
+```bash
+# ElasticSearch + Kibana setup
+docker-compose up -d elasticsearch kibana
+
+# Filebeat configuration
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - ./backend/logs/*.log
+  json.message_key: msg
+  json.keys_under_root: true
+
+output.elasticsearch:
+  hosts: ["localhost:9200"]
+```
+
+### Alerting
+```yaml
+# AlertManager rules
+groups:
+  - name: analyst_alerts
+    rules:
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+
+      - alert: LowDiskSpace
+        expr: node_filesystem_avail_bytes / node_filesystem_size_bytes < 0.1
+        for: 10m
+        labels:
+          severity: warning
+```
+
+---
+
+## 📈 Scaling Strategy
 
 ### Horizontal Scaling
-
-For high-traffic deployments, consider:
-
-1. **Multiple Backend Workers**
-   ```yaml
-   # In docker-compose.yml
-   backend:
-     deploy:
-       replicas: 3
-   ```
-
-2. **Load Balancer**
-   - Use HAProxy or Nginx as load balancer
-   - Configure health checks for backend instances
-
-3. **Database Connection Pooling**
-   - Use PgBouncer for PostgreSQL connection pooling
-   - Configure appropriate pool sizes in SQLAlchemy
-
-### Vertical Scaling
-
-- Increase CPU cores and RAM for Docker containers
-- Use SSD storage for database and uploads
-- Increase Celery worker concurrency
-
-### Caching Strategy
-
-- **Redis**: Already configured for caching
-- **CDN**: Use Cloudflare or AWS CloudFront for static assets
-- **Database Indexing**: Ensure proper indexes on frequently queried columns
-
-### Backup Strategy
-
 ```bash
-# Database backup
-docker-compose exec postgres pg_dump -U analyst_user ai_analyst > backup.sql
+# Scale backend workers
+docker-compose -f docker-compose.prod.yml up -d --scale backend=3
 
-# Automated backup script (cron)
-0 2 * * * docker-compose exec postgres pg_dump -U analyst_user ai_analyst > /backups/ai_analyst_$(date +\%Y\%m\%d).sql
-
-# Restore backup
-docker-compose exec -T postgres psql -U analyst_user ai_analyst < backup.sql
+# Scale Celery workers
+docker-compose -f docker-compose.prod.yml up -d --scale celery_worker=5
 ```
 
-## Security Best Practices
+### Database Scaling
+```sql
+-- Replication setup
+ALTER SYSTEM SET wal_level = replica;
+ALTER SYSTEM SET max_wal_senders = 10;
+SELECT pg_ctl_restart();
 
-1. **Keep dependencies updated**
-   ```bash
-   docker-compose pull
-   docker-compose up -d
-   ```
+-- On replica server
+pg_basebackup -h primary-host -D /var/lib/postgresql/data -U replication -v -P
+```
 
-2. **Use secrets management**
-   - Docker Secrets for sensitive data
-   - Environment variables for configuration
-   - Never hardcode credentials
+### Cache Optimization
+```python
+# Redis clustering for high availability
+redis-cli --cluster create \
+  node1:6379 node2:6379 node3:6379 \
+  node4:6379 node5:6379 node6:6379 \
+  --cluster-replicas 1
+```
 
-3. **Network isolation**
-   - Use Docker networks to isolate services
-   - Only expose necessary ports
-   - Use internal networks for service communication
+---
 
-4. **Regular security audits**
-   - Scan images for vulnerabilities: `docker scan`
-   - Review dependency updates
-   - Monitor access logs
+## 🚨 Troubleshooting
 
-5. **Rate limiting**
-   - Already configured with slowapi
-   - Adjust limits based on traffic patterns
+### Container Won't Start
+```bash
+# Check logs
+docker-compose logs backend
 
-## Support
+# Inspect container
+docker exec -it analyst_backend bash
 
-For issues or questions:
-- **Documentation**: Check inline code comments
-- **Logs**: Review application logs for errors
-- **Health Checks**: Use `/health/ready` endpoint
-- **GitHub Issues**: Report bugs in the repository
+# Check environment variables
+docker exec analyst_backend printenv
+```
+
+### Database Connection Error
+```bash
+# Test PostgreSQL
+docker exec analyst_postgres psql -U analyst -d analyst_db -c "SELECT 1"
+
+# Check PostgreSQL logs
+docker logs analyst_postgres
+```
+
+### Out of Memory
+```bash
+# Monitor Docker resource usage
+docker stats
+
+# Increase container limits
+# In docker-compose.yml:
+services:
+  backend:
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+```
+
+### Slow API Response
+```bash
+# Check Nginx logs
+docker logs analyst_nginx
+
+# Profile backend with pprof
+curl http://localhost:8000/debug/pprof/
+
+# Enable query logging in PostgreSQL
+ALTER SYSTEM SET log_statement = 'all';
+SELECT pg_ctl_restart();
+```
+
+---
+
+## ✅ Deployment Checklist
+
+- [ ] All environment variables configured
+- [ ] Database migrations run successfully
+- [ ] Admin user created
+- [ ] SSL/TLS certificates obtained
+- [ ] Nginx configuration tested
+- [ ] Docker images built and tested locally
+- [ ] Health checks passing
+- [ ] Logs aggregated and monitored
+- [ ] Backups configured
+- [ ] Load testing completed
+- [ ] Security audit passed
+- [ ] Documentation updated
+- [ ] Team trained on deployment
+
+---
+
+## 📞 Post-Deployment
+
+### First Week
+- Monitor error rates and response times
+- Test all critical user workflows
+- Verify backups are working
+- Collect performance metrics
+- Address any issues
+
+### Monthly Tasks
+- Review and rotate API keys
+- Update dependencies
+- Analyze usage patterns
+- Plan capacity upgrades
+- Security patching
+
+### Quarterly Tasks
+- Full security audit
+- Database optimization
+- Infrastructure review
+- Disaster recovery drill
+- Performance benchmarking
+
+---
+
+**Deployment Guide v1.0** | Last Updated: 2026-08-09

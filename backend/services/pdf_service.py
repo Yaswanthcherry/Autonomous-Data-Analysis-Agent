@@ -61,11 +61,12 @@ class PDFService:
 
         # ── Dataset Profile ──
         story.append(Paragraph("Dataset Profile", h2))
-        shape = profile.get("shape", {})
+        rows = profile.get("rows", "N/A")
+        cols = profile.get("cols", "N/A")
         profile_data = [
             ["Metric", "Value"],
-            ["Total Rows", str(shape.get("rows", "N/A"))],
-            ["Total Columns", str(shape.get("cols", "N/A"))],
+            ["Total Rows", str(rows)],
+            ["Total Columns", str(cols)],
             ["Memory Usage", f"{profile.get('memory_mb', 'N/A')} MB"],
             ["Duplicate Rows", str(profile.get("duplicate_rows", 0))],
             ["Task Type", eda.get("task_type", "N/A")],
