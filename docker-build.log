@@ -1,0 +1,1155 @@
+time="2026-08-22T12:38:48Z" level=warning msg="/mnt/c/Users/YASWANTH/Desktop/analysis agent/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image analysisagent-frontend Building 
+ Image analysisagent-backend Building 
+ Image analysisagent-celery_worker Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.64kB done
+#1 DONE 0.0s
+
+#2 [celery_worker internal] load build definition from Dockerfile
+#2 transferring dockerfile: 30B 0.1s
+#2 transferring dockerfile: 478B 0.3s done
+#2 DONE 0.3s
+
+#3 [frontend internal] load build definition from Dockerfile
+#3 transferring dockerfile: 517B 0.2s done
+#3 DONE 0.2s
+
+#4 [backend internal] load metadata for docker.io/library/python:3.11-slim
+#4 ...
+
+#5 [auth] library/python:pull token for registry-1.docker.io
+#5 DONE 0.0s
+
+#6 [auth] library/node:pull token for registry-1.docker.io
+#6 DONE 0.0s
+
+#7 [frontend internal] load metadata for docker.io/library/node:20-alpine
+#7 DONE 2.9s
+
+#4 [backend internal] load metadata for docker.io/library/python:3.11-slim
+#4 DONE 2.9s
+
+#8 [backend internal] load .dockerignore
+#8 transferring context:
+#8 transferring context: 2B 0.2s done
+#8 DONE 0.3s
+
+#9 [frontend internal] load .dockerignore
+#9 transferring context: 2B 0.2s done
+#9 DONE 0.2s
+
+#10 [frontend internal] load build context
+#10 DONE 0.0s
+
+#11 [celery_worker internal] load build context
+#11 DONE 0.0s
+
+#12 [celery_worker 1/7] FROM docker.io/library/python:3.11-slim@sha256:9c900dea9e8fb7e16277c179b555cc72d29a352dbc33cff48ad5a0412fd5bfc7
+#12 resolve docker.io/library/python:3.11-slim@sha256:9c900dea9e8fb7e16277c179b555cc72d29a352dbc33cff48ad5a0412fd5bfc7 0.0s done
+#12 DONE 0.0s
+
+#13 [frontend deps 1/4] FROM docker.io/library/node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293
+#13 resolve docker.io/library/node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 0.1s done
+#13 DONE 0.1s
+
+#14 [frontend deps 2/4] WORKDIR /app
+#14 CACHED
+
+#15 [backend 2/7] WORKDIR /app
+#15 CACHED
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 14.59kB 5.0s
+#11 transferring context: 21.80kB 10.0s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 0.684 Hit:1 http://deb.debian.org/debian trixie InRelease
+#16 0.715 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#16 1.211 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#16 1.418 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9673 kB]
+#16 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 268.52MB 15.1s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 271.56MB 20.3s
+#10 transferring context: 271.81MB 25.4s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 275.39MB 30.4s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 277.76MB 35.5s
+#10 transferring context: 278.21MB 40.6s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 279.16MB 45.7s
+#10 transferring context: 280.10MB 50.7s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 337.26MB 55.8s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 418.69MB 60.8s
+#10 transferring context: 421.41MB 65.9s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 422.87MB 71.0s
+#10 transferring context: 423.48MB 76.1s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 423.73MB 81.1s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 425.93MB 86.2s
+#10 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 80.51 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [4412 B]
+#16 80.60 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [247 kB]
+#16 81.93 Fetched 10.0 MB in 1min 22s (123 kB/s)
+#16 81.93 Reading package lists...
+#16 83.17 Reading package lists...
+#16 84.32 Building dependency tree...
+#16 84.60 Reading state information...
+#16 85.04 The following additional packages will be installed:
+#16 85.04   binutils binutils-common binutils-x86-64-linux-gnu cpp cpp-14
+#16 85.04   cpp-14-x86-64-linux-gnu cpp-x86-64-linux-gnu gcc-14 gcc-14-x86-64-linux-gnu
+#16 85.04   gcc-x86-64-linux-gnu krb5-locales libasan8 libatomic1 libbinutils
+#16 85.04   libc-dev-bin libc6-dev libcc1-0 libcom-err2 libcrypt-dev libctf-nobfd0
+#16 85.04   libctf0 libgcc-14-dev libgprofng0 libgssapi-krb5-2 libhwasan0 libisl23
+#16 85.04   libitm1 libjansson4 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0
+#16 85.05   libldap-common libldap2 liblsan0 libmpc3 libmpfr6 libpq5 libquadmath0
+#16 85.05   libsasl2-2 libsasl2-modules libsasl2-modules-db libsframe1 libssl-dev
+#16 85.05   libtsan2 libubsan1 linux-libc-dev manpages manpages-dev rpcsvc-proto
+#16 85.05 Suggested packages:
+#16 85.05   binutils-doc gprofng-gui binutils-gold cpp-doc gcc-14-locales cpp-14-doc
+#16 85.05   gcc-multilib make autoconf automake libtool flex bison gdb gcc-doc
+#16 85.05   gcc-14-multilib gcc-14-doc gdb-x86-64-linux-gnu libc-devtools glibc-doc
+#16 85.05   krb5-doc krb5-user postgresql-doc-17 libsasl2-modules-gssapi-mit
+#16 85.05   | libsasl2-modules-gssapi-heimdal libsasl2-modules-ldap libsasl2-modules-otp
+#16 85.05   libsasl2-modules-sql libssl-doc man-browser
+#16 85.37 The following NEW packages will be installed:
+#16 85.37   binutils binutils-common binutils-x86-64-linux-gnu cpp cpp-14
+#16 85.37   cpp-14-x86-64-linux-gnu cpp-x86-64-linux-gnu gcc gcc-14
+#16 85.37   gcc-14-x86-64-linux-gnu gcc-x86-64-linux-gnu krb5-locales libasan8
+#16 85.37   libatomic1 libbinutils libc-dev-bin libc6-dev libcc1-0 libcom-err2
+#16 85.37   libcrypt-dev libctf-nobfd0 libctf0 libgcc-14-dev libgomp1 libgprofng0
+#16 85.37   libgssapi-krb5-2 libhwasan0 libisl23 libitm1 libjansson4 libk5crypto3
+#16 85.37   libkeyutils1 libkrb5-3 libkrb5support0 libldap-common libldap2 liblsan0
+#16 85.37   libmpc3 libmpfr6 libpq-dev libpq5 libquadmath0 libsasl2-2 libsasl2-modules
+#16 85.37   libsasl2-modules-db libsframe1 libssl-dev libtsan2 libubsan1 linux-libc-dev
+#16 85.37   manpages manpages-dev rpcsvc-proto
+#16 85.75 0 upgraded, 53 newly installed, 0 to remove and 9 not upgraded.
+#16 85.75 Need to get 65.0 MB of archives.
+#16 85.75 After this operation, 244 MB of additional disk space will be used.
+#16 85.75 Get:1 http://deb.debian.org/debian trixie/main amd64 krb5-locales all 1.21.3-5+deb13u1 [101 kB]
+#16 85.93 Get:2 http://deb.debian.org/debian trixie/main amd64 manpages all 6.9.1-1 [1393 kB]
+#16 87.29 Get:3 http://deb.debian.org/debian trixie/main amd64 libsframe1 amd64 2.44-3 [78.4 kB]
+#16 87.58 Get:4 http://deb.debian.org/debian trixie/main amd64 binutils-common amd64 2.44-3 [2509 kB]
+#16 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 429.34MB 91.3s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 430.46MB 96.3s
+#10 transferring context: 433.80MB 101.4s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 434.13MB 106.4s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 435.34MB 111.5s
+#10 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 105.2 Get:5 http://deb.debian.org/debian trixie/main amd64 libbinutils amd64 2.44-3 [534 kB]
+#16 109.3 Get:6 http://deb.debian.org/debian trixie/main amd64 libgprofng0 amd64 2.44-3 [808 kB]
+#16 115.0 Get:7 http://deb.debian.org/debian trixie/main amd64 libctf-nobfd0 amd64 2.44-3 [156 kB]
+#16 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 439.43MB 116.5s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 440.07MB 121.6s
+#10 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 116.2 Get:8 http://deb.debian.org/debian trixie/main amd64 libctf0 amd64 2.44-3 [88.6 kB]
+#16 116.9 Get:9 http://deb.debian.org/debian trixie/main amd64 libjansson4 amd64 2.14-2+b3 [39.8 kB]
+#16 117.2 Get:10 http://deb.debian.org/debian trixie/main amd64 binutils-x86-64-linux-gnu amd64 2.44-3 [1014 kB]
+#16 125.4 Get:11 http://deb.debian.org/debian trixie/main amd64 binutils amd64 2.44-3 [265 kB]
+#16 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 441.01MB 126.6s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 445.86MB 131.7s
+#10 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 126.6 Get:12 http://deb.debian.org/debian trixie/main amd64 libisl23 amd64 0.27-1 [659 kB]
+#16 130.8 Get:13 http://deb.debian.org/debian trixie/main amd64 libmpfr6 amd64 4.2.2-1 [729 kB]
+#16 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 446.99MB 136.7s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 447.37MB 141.9s
+#10 transferring context: 447.53MB 147.0s
+#10 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 137.1 Get:14 http://deb.debian.org/debian trixie/main amd64 libmpc3 amd64 1.3.1-1+b3 [52.2 kB]
+#16 137.4 Get:15 http://deb.debian.org/debian trixie/main amd64 cpp-14-x86-64-linux-gnu amd64 14.2.0-19 [11.0 MB]
+#16 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 448.77MB 152.1s
+#10 transferring context: 449.64MB 157.2s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 451.52MB 162.3s
+#10 transferring context: 452.60MB 167.3s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 235.33kB 172.4s
+#11 transferring context: 242.31kB 177.5s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 247.61kB 182.5s
+#11 transferring context: 253.41kB 187.7s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 259.22kB 192.7s
+#11 transferring context: 264.57kB 197.9s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 269.58kB 203.0s
+#11 transferring context: 277.14kB 208.1s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 284.52kB 213.2s
+#11 transferring context: 291.90kB 218.3s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 298.88kB 223.4s
+#11 transferring context: 305.95kB 228.5s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 312.93kB 233.5s
+#11 transferring context: 318.85kB 238.7s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 233.2 Get:16 http://deb.debian.org/debian trixie/main amd64 cpp-14 amd64 14.2.0-19 [1280 B]
+#16 233.3 Get:17 http://deb.debian.org/debian trixie/main amd64 cpp-x86-64-linux-gnu amd64 4:14.2.0-1 [4840 B]
+#16 233.3 Get:18 http://deb.debian.org/debian trixie/main amd64 cpp amd64 4:14.2.0-1 [1568 B]
+#16 233.3 Get:19 http://deb.debian.org/debian trixie/main amd64 libcc1-0 amd64 14.2.0-19 [42.8 kB]
+#16 233.7 Get:20 http://deb.debian.org/debian trixie/main amd64 libgomp1 amd64 14.2.0-19 [137 kB]
+#16 234.9 Get:21 http://deb.debian.org/debian trixie/main amd64 libitm1 amd64 14.2.0-19 [26.0 kB]
+#16 235.1 Get:22 http://deb.debian.org/debian trixie/main amd64 libatomic1 amd64 14.2.0-19 [9308 B]
+#16 235.2 Get:23 http://deb.debian.org/debian trixie/main amd64 libasan8 amd64 14.2.0-19 [2725 kB]
+#16 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 322.79kB 243.7s
+#11 transferring context: 329.56kB 248.9s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 336.55kB 253.9s
+#11 transferring context: 345.99kB 259.0s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 355.60kB 264.1s
+#11 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 257.3 Get:24 http://deb.debian.org/debian trixie/main amd64 liblsan0 amd64 14.2.0-19 [1204 kB]
+#16 265.6 Get:25 http://deb.debian.org/debian trixie/main amd64 libtsan2 amd64 14.2.0-19 [2460 kB]
+#16 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 365.00kB 269.2s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 371.83kB 274.2s
+#11 transferring context: 377.75kB 279.3s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 383.78kB 284.3s
+#11 transferring context: 389.20kB 289.3s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 392.64kB 294.4s
+#11 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 285.1 Get:26 http://deb.debian.org/debian trixie/main amd64 libubsan1 amd64 14.2.0-19 [1074 kB]
+#16 291.9 Get:27 http://deb.debian.org/debian trixie/main amd64 libhwasan0 amd64 14.2.0-19 [1488 kB]
+#16 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 398.39kB 299.5s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 403.46kB 304.6s
+#11 transferring context: 408.08kB 309.7s
+#11 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 301.6 Get:28 http://deb.debian.org/debian trixie/main amd64 libquadmath0 amd64 14.2.0-19 [145 kB]
+#16 302.3 Get:29 http://deb.debian.org/debian trixie/main amd64 libgcc-14-dev amd64 14.2.0-19 [2672 kB]
+#16 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 413.66kB 314.7s
+#11 transferring context: 419.34kB 319.9s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 425.21kB 325.0s
+#11 transferring context: 431.26kB 330.0s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 439.98kB 335.1s
+#11 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 327.8 Get:30 http://deb.debian.org/debian trixie/main amd64 gcc-14-x86-64-linux-gnu amd64 14.2.0-19 [21.4 MB]
+#16 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 450.82kB 340.3s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 462.71kB 345.4s
+#11 transferring context: 471.44kB 350.4s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 480.28kB 355.5s
+#11 transferring context: 489.21kB 360.5s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 499.48kB 365.6s
+#11 transferring context: 510.38kB 370.6s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 518.50kB 375.7s
+#11 transferring context: 525.25kB 380.8s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 531.78kB 385.8s
+#11 transferring context: 538.79kB 391.0s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 544.63kB 396.1s
+#11 transferring context: 550.46kB 401.1s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 557.15kB 406.2s
+#11 transferring context: 563.32kB 411.3s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 568.77kB 416.4s
+#11 transferring context: 574.37kB 421.5s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 579.36kB 426.5s
+#11 transferring context: 585.98kB 431.6s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 591.67kB 436.8s
+#11 transferring context: 597.76kB 441.8s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 611.36kB 446.9s
+#11 transferring context: 625.98kB 451.9s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 640.81kB 457.0s
+#11 transferring context: 655.50kB 462.1s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 674.61kB 467.2s
+#11 transferring context: 691.71kB 472.3s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 586.98MB 477.4s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 726.59kB 482.4s
+#11 transferring context: 740.43kB 487.4s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 752.43kB 492.4s
+#11 transferring context: 763.53kB 497.5s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 776.81kB 502.6s
+#11 transferring context: 789.62kB 507.7s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 802.88kB 512.8s
+#11 transferring context: 814.71kB 517.8s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 820.29kB 522.9s
+#11 transferring context: 826.04kB 528.1s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 832.54kB 533.1s
+#11 transferring context: 838.51kB 538.1s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 844.28kB 543.2s
+#11 transferring context: 851.68kB 548.3s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 858.43kB 553.4s
+#11 transferring context: 862.91kB 558.4s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 867.76kB 563.5s
+#11 transferring context: 874.14kB 568.6s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 880.59kB 573.7s
+#11 transferring context: 886.12kB 578.9s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 891.90kB 584.1s
+#11 transferring context: 897.28kB 589.3s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 903.80kB 594.3s
+#11 transferring context: 910.68kB 599.4s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 913.00kB 604.5s
+#11 transferring context: 915.24kB 609.5s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 603.3 Get:31 http://deb.debian.org/debian trixie/main amd64 gcc-14 amd64 14.2.0-19 [540 kB]
+#16 610.0 Get:32 http://deb.debian.org/debian trixie/main amd64 gcc-x86-64-linux-gnu amd64 4:14.2.0-1 [1436 B]
+#16 610.0 Get:33 http://deb.debian.org/debian trixie/main amd64 gcc amd64 4:14.2.0-1 [5136 B]
+#16 610.0 Get:34 http://deb.debian.org/debian trixie/main amd64 libc-dev-bin amd64 2.41-12+deb13u3 [59.8 kB]
+#16 610.9 Get:35 http://deb.debian.org/debian-security trixie-security/main amd64 linux-libc-dev all 6.12.101-1 [2901 kB]
+#16 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 788.05MB 614.7s
+#10 transferring context: 790.28MB 619.7s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 925.68kB 624.8s
+#11 transferring context: 929.84kB 630.0s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 933.63kB 635.1s
+#11 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 638.7 Get:36 http://deb.debian.org/debian trixie/main amd64 libcrypt-dev amd64 1:4.4.38-1 [119 kB]
+#16 639.5 Get:37 http://deb.debian.org/debian trixie/main amd64 rpcsvc-proto amd64 1.4.3-1 [63.3 kB]
+#16 640.0 Get:38 http://deb.debian.org/debian trixie/main amd64 libc6-dev amd64 2.41-12+deb13u3 [1992 kB]
+#16 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 797.64MB 640.7s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 943.19kB 645.9s
+#11 transferring context: 947.96kB 650.9s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 952.08kB 656.0s
+#11 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 659.8 Get:39 http://deb.debian.org/debian trixie/main amd64 libcom-err2 amd64 1.47.2-3+b11 [25.0 kB]
+#16 659.8 Get:40 http://deb.debian.org/debian trixie/main amd64 libkrb5support0 amd64 1.21.3-5+deb13u1 [33.1 kB]
+#16 660.3 Get:41 http://deb.debian.org/debian trixie/main amd64 libk5crypto3 amd64 1.21.3-5+deb13u1 [81.2 kB]
+#16 661.1 Get:42 http://deb.debian.org/debian trixie/main amd64 libkeyutils1 amd64 1.6.3-6 [9456 B]
+#16 661.3 Get:43 http://deb.debian.org/debian trixie/main amd64 libkrb5-3 amd64 1.21.3-5+deb13u1 [326 kB]
+#16 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 800.25MB 661.4s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 960.50kB 666.6s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 802.53MB 671.6s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 664.7 Get:44 http://deb.debian.org/debian trixie/main amd64 libgssapi-krb5-2 amd64 1.21.3-5+deb13u1 [138 kB]
+#16 666.1 Get:45 http://deb.debian.org/debian trixie/main amd64 libldap-common all 2.6.10+dfsg-1 [35.1 kB]
+#16 666.6 Get:46 http://deb.debian.org/debian trixie/main amd64 libsasl2-modules-db amd64 2.1.28+dfsg1-9 [19.8 kB]
+#16 666.7 Get:47 http://deb.debian.org/debian trixie/main amd64 libsasl2-2 amd64 2.1.28+dfsg1-9 [57.5 kB]
+#16 667.1 Get:48 http://deb.debian.org/debian trixie/main amd64 libldap2 amd64 2.6.10+dfsg-1 [194 kB]
+#16 668.8 Get:49 http://deb.debian.org/debian-security trixie-security/main amd64 libpq5 amd64 17.11-0+deb13u1 [237 kB]
+#16 670.0 Get:50 http://deb.debian.org/debian trixie/main amd64 libssl-dev amd64 3.5.6-1~deb13u2 [2959 kB]
+#16 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 968.24kB 676.8s
+#11 transferring context: 971.65kB 681.8s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 978.28kB 686.9s
+#11 transferring context: 981.86kB 692.0s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 986.14kB 697.1s
+#11 transferring context: 990.38kB 702.2s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 995.23kB 707.2s
+#11 transferring context: 999.42kB 712.3s
+#11 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 702.6 Get:51 http://deb.debian.org/debian-security trixie-security/main amd64 libpq-dev amd64 17.11-0+deb13u1 [159 kB]
+#16 704.2 Get:52 http://deb.debian.org/debian trixie/main amd64 libsasl2-modules amd64 2.1.28+dfsg1-9 [66.7 kB]
+#16 704.7 Get:53 http://deb.debian.org/debian trixie/main amd64 manpages-dev all 6.9.1-1 [2122 kB]
+#16 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 1.00MB 717.5s
+#11 transferring context: 1.01MB 722.5s
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 1.01MB 727.6s
+#11 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 731.9 debconf: unable to initialize frontend: Dialog
+#16 731.9 debconf: (TERM is not set, so the dialog frontend is not usable.)
+#16 731.9 debconf: falling back to frontend: Readline
+#16 731.9 debconf: unable to initialize frontend: Readline
+#16 731.9 debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8, <STDIN> line 53.)
+#16 731.9 debconf: falling back to frontend: Teletype
+#16 731.9 debconf: unable to initialize frontend: Teletype
+#16 731.9 debconf: (This frontend requires a controlling tty.)
+#16 731.9 debconf: falling back to frontend: Noninteractive
+#16 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 846.76MB 733.2s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 1.02MB 738.2s
+#11 ...
+
+#16 [celery_worker 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 734.6 Fetched 65.0 MB in 10min 46s (101 kB/s)
+#16 734.6 Selecting previously unselected package krb5-locales.
+#16 734.6 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 5645 files and directories currently installed.)
+#16 734.6 Preparing to unpack .../00-krb5-locales_1.21.3-5+deb13u1_all.deb ...
+#16 734.7 Unpacking krb5-locales (1.21.3-5+deb13u1) ...
+#16 734.7 Selecting previously unselected package manpages.
+#16 734.7 Preparing to unpack .../01-manpages_6.9.1-1_all.deb ...
+#16 734.7 Unpacking manpages (6.9.1-1) ...
+#16 734.8 Selecting previously unselected package libsframe1:amd64.
+#16 734.8 Preparing to unpack .../02-libsframe1_2.44-3_amd64.deb ...
+#16 734.9 Unpacking libsframe1:amd64 (2.44-3) ...
+#16 734.9 Selecting previously unselected package binutils-common:amd64.
+#16 734.9 Preparing to unpack .../03-binutils-common_2.44-3_amd64.deb ...
+#16 734.9 Unpacking binutils-common:amd64 (2.44-3) ...
+#16 735.2 Selecting previously unselected package libbinutils:amd64.
+#16 735.2 Preparing to unpack .../04-libbinutils_2.44-3_amd64.deb ...
+#16 735.2 Unpacking libbinutils:amd64 (2.44-3) ...
+#16 735.3 Selecting previously unselected package libgprofng0:amd64.
+#16 735.3 Preparing to unpack .../05-libgprofng0_2.44-3_amd64.deb ...
+#16 735.3 Unpacking libgprofng0:amd64 (2.44-3) ...
+#16 735.5 Selecting previously unselected package libctf-nobfd0:amd64.
+#16 735.5 Preparing to unpack .../06-libctf-nobfd0_2.44-3_amd64.deb ...
+#16 735.5 Unpacking libctf-nobfd0:amd64 (2.44-3) ...
+#16 735.5 Selecting previously unselected package libctf0:amd64.
+#16 735.5 Preparing to unpack .../07-libctf0_2.44-3_amd64.deb ...
+#16 735.6 Unpacking libctf0:amd64 (2.44-3) ...
+#16 735.6 Selecting previously unselected package libjansson4:amd64.
+#16 735.6 Preparing to unpack .../08-libjansson4_2.14-2+b3_amd64.deb ...
+#16 735.6 Unpacking libjansson4:amd64 (2.14-2+b3) ...
+#16 735.7 Selecting previously unselected package binutils-x86-64-linux-gnu.
+#16 735.7 Preparing to unpack .../09-binutils-x86-64-linux-gnu_2.44-3_amd64.deb ...
+#16 735.7 Unpacking binutils-x86-64-linux-gnu (2.44-3) ...
+#16 735.9 Selecting previously unselected package binutils.
+#16 735.9 Preparing to unpack .../10-binutils_2.44-3_amd64.deb ...
+#16 735.9 Unpacking binutils (2.44-3) ...
+#16 736.0 Selecting previously unselected package libisl23:amd64.
+#16 736.0 Preparing to unpack .../11-libisl23_0.27-1_amd64.deb ...
+#16 736.0 Unpacking libisl23:amd64 (0.27-1) ...
+#16 736.1 Selecting previously unselected package libmpfr6:amd64.
+#16 736.1 Preparing to unpack .../12-libmpfr6_4.2.2-1_amd64.deb ...
+#16 736.2 Unpacking libmpfr6:amd64 (4.2.2-1) ...
+#16 736.4 Selecting previously unselected package libmpc3:amd64.
+#16 736.4 Preparing to unpack .../13-libmpc3_1.3.1-1+b3_amd64.deb ...
+#16 736.4 Unpacking libmpc3:amd64 (1.3.1-1+b3) ...
+#16 736.7 Selecting previously unselected package cpp-14-x86-64-linux-gnu.
+#16 736.7 Preparing to unpack .../14-cpp-14-x86-64-linux-gnu_14.2.0-19_amd64.deb ...
+#16 736.7 Unpacking cpp-14-x86-64-linux-gnu (14.2.0-19) ...
+#16 737.7 Selecting previously unselected package cpp-14.
+#16 737.7 Preparing to unpack .../15-cpp-14_14.2.0-19_amd64.deb ...
+#16 737.7 Unpacking cpp-14 (14.2.0-19) ...
+#16 737.7 Selecting previously unselected package cpp-x86-64-linux-gnu.
+#16 737.7 Preparing to unpack .../16-cpp-x86-64-linux-gnu_4%3a14.2.0-1_amd64.deb ...
+#16 737.8 Unpacking cpp-x86-64-linux-gnu (4:14.2.0-1) ...
+#16 737.8 Selecting previously unselected package cpp.
+#16 737.8 Preparing to unpack .../17-cpp_4%3a14.2.0-1_amd64.deb ...
+#16 737.8 Unpacking cpp (4:14.2.0-1) ...
+#16 737.9 Selecting previously unselected package libcc1-0:amd64.
+#16 737.9 Preparing to unpack .../18-libcc1-0_14.2.0-19_amd64.deb ...
+#16 737.9 Unpacking libcc1-0:amd64 (14.2.0-19) ...
+#16 737.9 Selecting previously unselected package libgomp1:amd64.
+#16 737.9 Preparing to unpack .../19-libgomp1_14.2.0-19_amd64.deb ...
+#16 737.9 Unpacking libgomp1:amd64 (14.2.0-19) ...
+#16 738.0 Selecting previously unselected package libitm1:amd64.
+#16 738.0 Preparing to unpack .../20-libitm1_14.2.0-19_amd64.deb ...
+#16 738.0 Unpacking libitm1:amd64 (14.2.0-19) ...
+#16 738.0 Selecting previously unselected package libatomic1:amd64.
+#16 738.0 Preparing to unpack .../21-libatomic1_14.2.0-19_amd64.deb ...
+#16 738.0 Unpacking libatomic1:amd64 (14.2.0-19) ...
+#16 738.1 Selecting previously unselected package libasan8:amd64.
+#16 738.1 Preparing to unpack .../22-libasan8_14.2.0-19_amd64.deb ...
+#16 738.1 Unpacking libasan8:amd64 (14.2.0-19) ...
+#16 738.3 Selecting previously unselected package liblsan0:amd64.
+#16 738.3 Preparing to unpack .../23-liblsan0_14.2.0-19_amd64.deb ...
+#16 738.3 Unpacking liblsan0:amd64 (14.2.0-19) ...
+#16 738.5 Selecting previously unselected package libtsan2:amd64.
+#16 738.5 Preparing to unpack .../24-libtsan2_14.2.0-19_amd64.deb ...
+#16 738.5 Unpacking libtsan2:amd64 (14.2.0-19) ...
+#16 738.7 Selecting previously unselected package libubsan1:amd64.
+#16 738.7 Preparing to unpack .../25-libubsan1_14.2.0-19_amd64.deb ...
+#16 738.7 Unpacking libubsan1:amd64 (14.2.0-19) ...
+#16 738.8 Selecting previously unselected package libhwasan0:amd64.
+#16 738.8 Preparing to unpack .../26-libhwasan0_14.2.0-19_amd64.deb ...
+#16 738.8 Unpacking libhwasan0:amd64 (14.2.0-19) ...
+#16 738.9 Selecting previously unselected package libquadmath0:amd64.
+#16 738.9 Preparing to unpack .../27-libquadmath0_14.2.0-19_amd64.deb ...
+#16 738.9 Unpacking libquadmath0:amd64 (14.2.0-19) ...
+#16 739.0 Selecting previously unselected package libgcc-14-dev:amd64.
+#16 739.0 Preparing to unpack .../28-libgcc-14-dev_14.2.0-19_amd64.deb ...
+#16 739.0 Unpacking libgcc-14-dev:amd64 (14.2.0-19) ...
+#16 739.1 Selecting previously unselected package gcc-14-x86-64-linux-gnu.
+#16 739.1 Preparing to unpack .../29-gcc-14-x86-64-linux-gnu_14.2.0-19_amd64.deb ...
+#16 739.1 Unpacking gcc-14-x86-64-linux-gnu (14.2.0-19) ...
+#16 739.7 Selecting previously unselected package gcc-14.
+#16 739.7 Preparing to unpack .../30-gcc-14_14.2.0-19_amd64.deb ...
+#16 739.7 Unpacking gcc-14 (14.2.0-19) ...
+#16 739.7 Selecting previously unselected package gcc-x86-64-linux-gnu.
+#16 739.7 Preparing to unpack .../31-gcc-x86-64-linux-gnu_4%3a14.2.0-1_amd64.deb ...
+#16 739.7 Unpacking gcc-x86-64-linux-gnu (4:14.2.0-1) ...
+#16 739.8 Selecting previously unselected package gcc.
+#16 739.8 Preparing to unpack .../32-gcc_4%3a14.2.0-1_amd64.deb ...
+#16 739.8 Unpacking gcc (4:14.2.0-1) ...
+#16 739.8 Selecting previously unselected package libc-dev-bin.
+#16 739.8 Preparing to unpack .../33-libc-dev-bin_2.41-12+deb13u3_amd64.deb ...
+#16 739.8 Unpacking libc-dev-bin (2.41-12+deb13u3) ...
+#16 739.8 Selecting previously unselected package linux-libc-dev.
+#16 739.8 Preparing to unpack .../34-linux-libc-dev_6.12.101-1_all.deb ...
+#16 739.8 Unpacking linux-libc-dev (6.12.101-1) ...
+#16 740.0 Selecting previously unselected package libcrypt-dev:amd64.
+#16 740.0 Preparing to unpack .../35-libcrypt-dev_1%3a4.4.38-1_amd64.deb ...
+#16 740.0 Unpacking libcrypt-dev:amd64 (1:4.4.38-1) ...
+#16 740.1 Selecting previously unselected package rpcsvc-proto.
+#16 740.1 Preparing to unpack .../36-rpcsvc-proto_1.4.3-1_amd64.deb ...
+#16 740.1 Unpacking rpcsvc-proto (1.4.3-1) ...
+#16 740.1 Selecting previously unselected package libc6-dev:amd64.
+#16 740.1 Preparing to unpack .../37-libc6-dev_2.41-12+deb13u3_amd64.deb ...
+#16 740.1 Unpacking libc6-dev:amd64 (2.41-12+deb13u3) ...
+#16 740.3 Selecting previously unselected package libcom-err2:amd64.
+#16 740.3 Preparing to unpack .../38-libcom-err2_1.47.2-3+b11_amd64.deb ...
+#16 740.3 Unpacking libcom-err2:amd64 (1.47.2-3+b11) ...
+#16 740.3 Selecting previously unselected package libkrb5support0:amd64.
+#16 740.3 Preparing to unpack .../39-libkrb5support0_1.21.3-5+deb13u1_amd64.deb ...
+#16 740.3 Unpacking libkrb5support0:amd64 (1.21.3-5+deb13u1) ...
+#16 740.3 Selecting previously unselected package libk5crypto3:amd64.
+#16 740.4 Preparing to unpack .../40-libk5crypto3_1.21.3-5+deb13u1_amd64.deb ...
+#16 740.4 Unpacking libk5crypto3:amd64 (1.21.3-5+deb13u1) ...
+#16 740.4 Selecting previously unselected package libkeyutils1:amd64.
+#16 740.4 Preparing to unpack .../41-libkeyutils1_1.6.3-6_amd64.deb ...
+#16 740.4 Unpacking libkeyutils1:amd64 (1.6.3-6) ...
+#16 740.4 Selecting previously unselected package libkrb5-3:amd64.
+#16 740.4 Preparing to unpack .../42-libkrb5-3_1.21.3-5+deb13u1_amd64.deb ...
+#16 740.4 Unpacking libkrb5-3:amd64 (1.21.3-5+deb13u1) ...
+#16 740.5 Selecting previously unselected package libgssapi-krb5-2:amd64.
+#16 740.5 Preparing to unpack .../43-libgssapi-krb5-2_1.21.3-5+deb13u1_amd64.deb ...
+#16 740.5 Unpacking libgssapi-krb5-2:amd64 (1.21.3-5+deb13u1) ...
+#16 740.5 Selecting previously unselected package libldap-common.
+#16 740.5 Preparing to unpack .../44-libldap-common_2.6.10+dfsg-1_all.deb ...
+#16 740.5 Unpacking libldap-common (2.6.10+dfsg-1) ...
+#16 740.6 Selecting previously unselected package libsasl2-modules-db:amd64.
+#16 740.6 Preparing to unpack .../45-libsasl2-modules-db_2.1.28+dfsg1-9_amd64.deb ...
+#16 740.6 Unpacking libsasl2-modules-db:amd64 (2.1.28+dfsg1-9) ...
+#16 740.6 Selecting previously unselected package libsasl2-2:amd64.
+#16 740.6 Preparing to unpack .../46-libsasl2-2_2.1.28+dfsg1-9_amd64.deb ...
+#16 740.6 Unpacking libsasl2-2:amd64 (2.1.28+dfsg1-9) ...
+#16 740.6 Selecting previously unselected package libldap2:amd64.
+#16 740.6 Preparing to unpack .../47-libldap2_2.6.10+dfsg-1_amd64.deb ...
+#16 740.6 Unpacking libldap2:amd64 (2.6.10+dfsg-1) ...
+#16 740.7 Selecting previously unselected package libpq5:amd64.
+#16 740.7 Preparing to unpack .../48-libpq5_17.11-0+deb13u1_amd64.deb ...
+#16 740.7 Unpacking libpq5:amd64 (17.11-0+deb13u1) ...
+#16 740.7 Selecting previously unselected package libssl-dev:amd64.
+#16 740.7 Preparing to unpack .../49-libssl-dev_3.5.6-1~deb13u2_amd64.deb ...
+#16 740.7 Unpacking libssl-dev:amd64 (3.5.6-1~deb13u2) ...
+#16 740.9 Selecting previously unselected package libpq-dev.
+#16 740.9 Preparing to unpack .../50-libpq-dev_17.11-0+deb13u1_amd64.deb ...
+#16 740.9 Unpacking libpq-dev (17.11-0+deb13u1) ...
+#16 741.0 Selecting previously unselected package libsasl2-modules:amd64.
+#16 741.0 Preparing to unpack .../51-libsasl2-modules_2.1.28+dfsg1-9_amd64.deb ...
+#16 741.0 Unpacking libsasl2-modules:amd64 (2.1.28+dfsg1-9) ...
+#16 741.0 Selecting previously unselected package manpages-dev.
+#16 741.0 Preparing to unpack .../52-manpages-dev_6.9.1-1_all.deb ...
+#16 741.0 Unpacking manpages-dev (6.9.1-1) ...
+#16 741.1 Setting up libkeyutils1:amd64 (1.6.3-6) ...
+#16 741.2 Setting up manpages (6.9.1-1) ...
+#16 741.2 Setting up libsasl2-modules:amd64 (2.1.28+dfsg1-9) ...
+#16 741.2 Setting up binutils-common:amd64 (2.44-3) ...
+#16 741.2 Setting up linux-libc-dev (6.12.101-1) ...
+#16 741.2 Setting up libctf-nobfd0:amd64 (2.44-3) ...
+#16 741.2 Setting up krb5-locales (1.21.3-5+deb13u1) ...
+#16 741.2 Setting up libcom-err2:amd64 (1.47.2-3+b11) ...
+#16 741.2 Setting up libgomp1:amd64 (14.2.0-19) ...
+#16 741.3 Setting up libldap-common (2.6.10+dfsg-1) ...
+#16 741.3 Setting up libsframe1:amd64 (2.44-3) ...
+#16 741.3 Setting up libjansson4:amd64 (2.14-2+b3) ...
+#16 741.3 Setting up libkrb5support0:amd64 (1.21.3-5+deb13u1) ...
+#16 741.3 Setting up libsasl2-modules-db:amd64 (2.1.28+dfsg1-9) ...
+#16 741.3 Setting up rpcsvc-proto (1.4.3-1) ...
+#16 741.3 Setting up libmpfr6:amd64 (4.2.2-1) ...
+#16 741.3 Setting up libquadmath0:amd64 (14.2.0-19) ...
+#16 741.3 Setting up libssl-dev:amd64 (3.5.6-1~deb13u2) ...
+#16 741.3 Setting up libmpc3:amd64 (1.3.1-1+b3) ...
+#16 741.4 Setting up libatomic1:amd64 (14.2.0-19) ...
+#16 741.4 Setting up libk5crypto3:amd64 (1.21.3-5+deb13u1) ...
+#16 741.4 Setting up libsasl2-2:amd64 (2.1.28+dfsg1-9) ...
+#16 741.4 Setting up libubsan1:amd64 (14.2.0-19) ...
+#16 741.4 Setting up libhwasan0:amd64 (14.2.0-19) ...
+#16 741.4 Setting up libcrypt-dev:amd64 (1:4.4.38-1) ...
+#16 741.4 Setting up libasan8:amd64 (14.2.0-19) ...
+#16 741.4 Setting up libkrb5-3:amd64 (1.21.3-5+deb13u1) ...
+#16 741.4 Setting up libtsan2:amd64 (14.2.0-19) ...
+#16 741.5 Setting up libbinutils:amd64 (2.44-3) ...
+#16 741.5 Setting up libisl23:amd64 (0.27-1) ...
+#16 741.5 Setting up libc-dev-bin (2.41-12+deb13u3) ...
+#16 741.5 Setting up libcc1-0:amd64 (14.2.0-19) ...
+#16 741.5 Setting up libldap2:amd64 (2.6.10+dfsg-1) ...
+#16 741.5 Setting up liblsan0:amd64 (14.2.0-19) ...
+#16 741.5 Setting up libitm1:amd64 (14.2.0-19) ...
+#16 741.5 Setting up libctf0:amd64 (2.44-3) ...
+#16 741.6 Setting up manpages-dev (6.9.1-1) ...
+#16 741.6 Setting up libgprofng0:amd64 (2.44-3) ...
+#16 741.6 Setting up libgssapi-krb5-2:amd64 (1.21.3-5+deb13u1) ...
+#16 741.6 Setting up cpp-14-x86-64-linux-gnu (14.2.0-19) ...
+#16 741.6 Setting up cpp-14 (14.2.0-19) ...
+#16 741.6 Setting up libc6-dev:amd64 (2.41-12+deb13u3) ...
+#16 741.6 Setting up libgcc-14-dev:amd64 (14.2.0-19) ...
+#16 741.6 Setting up binutils-x86-64-linux-gnu (2.44-3) ...
+#16 741.6 Setting up cpp-x86-64-linux-gnu (4:14.2.0-1) ...
+#16 741.6 Setting up libpq5:amd64 (17.11-0+deb13u1) ...
+#16 741.7 Setting up libpq-dev (17.11-0+deb13u1) ...
+#16 741.7 Setting up binutils (2.44-3) ...
+#16 741.7 Setting up cpp (4:14.2.0-1) ...
+#16 741.7 Setting up gcc-14-x86-64-linux-gnu (14.2.0-19) ...
+#16 741.7 Setting up gcc-x86-64-linux-gnu (4:14.2.0-1) ...
+#16 741.8 Setting up gcc-14 (14.2.0-19) ...
+#16 741.8 Setting up gcc (4:14.2.0-1) ...
+#16 741.8 Processing triggers for libc-bin (2.41-12+deb13u3) ...
+#16 ...
+
+#10 [frontend internal] load build context
+#10 transferring context: 847.83MB 743.5s
+#10 ...
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#10 [frontend internal] load build context
+#10 ...
+
+#16 [backend 3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#16 DONE 744.1s
+
+#10 [frontend internal] load build context
+#10 transferring context: 849.23MB 745.8s done
+#10 DONE 746.3s
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#17 [frontend deps 3/4] COPY package.json package-lock.json* ./
+#17 DONE 1.0s
+
+#11 [celery_worker internal] load build context
+#11 ...
+
+#18 [frontend deps 4/4] RUN npm ci
+#18 2.479 npm warn EBADENGINE Unsupported engine {
+#18 2.479 npm warn EBADENGINE   package: '@mapbox/jsonlint-lines-primitives@2.0.3',
+#18 2.479 npm warn EBADENGINE   required: { node: '>= 22' },
+#18 2.479 npm warn EBADENGINE   current: { node: 'v20.20.2', npm: '10.8.2' }
+#18 2.479 npm warn EBADENGINE }
+#18 2.499 npm error code EUSAGE
+#18 2.499 npm error
+#18 2.499 npm error `npm ci` can only install packages when your package.json and package-lock.json or npm-shrinkwrap.json are in sync. Please update your lock file with `npm install` before continuing.
+#18 2.499 npm error
+#18 2.499 npm error Missing: @emnapi/core@1.11.3 from lock file
+#18 2.499 npm error Missing: @emnapi/runtime@1.11.3 from lock file
+#18 2.499 npm error
+#18 2.499 npm error Clean install a project
+#18 2.499 npm error
+#18 2.499 npm error Usage:
+#18 2.499 npm error npm ci
+#18 2.499 npm error
+#18 2.499 npm error Options:
+#18 2.499 npm error [--install-strategy <hoisted|nested|shallow|linked>] [--legacy-bundling]
+#18 2.499 npm error [--global-style] [--omit <dev|optional|peer> [--omit <dev|optional|peer> ...]]
+#18 2.499 npm error [--include <prod|dev|optional|peer> [--include <prod|dev|optional|peer> ...]]
+#18 2.499 npm error [--strict-peer-deps] [--foreground-scripts] [--ignore-scripts] [--no-audit]
+#18 2.499 npm error [--no-bin-links] [--no-fund] [--dry-run]
+#18 2.499 npm error [-w|--workspace <workspace-name> [-w|--workspace <workspace-name> ...]]
+#18 2.499 npm error [-ws|--workspaces] [--include-workspace-root] [--install-links]
+#18 2.499 npm error
+#18 2.499 npm error aliases: clean-install, ic, install-clean, isntall-clean
+#18 2.499 npm error
+#18 2.499 npm error Run "npm help ci" for more info
+#18 2.502 npm notice
+#18 2.502 npm notice New major version of npm available! 10.8.2 -> 12.0.2
+#18 2.502 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.0.2
+#18 2.502 npm notice To update run: npm install -g npm@12.0.2
+#18 2.502 npm notice
+#18 2.503 npm error A complete log of this run can be found in: /root/.npm/_logs/2026-08-22T12_51_24_248Z-debug-0.log
+#18 ERROR: process "/bin/sh -c npm ci" did not complete successfully: exit code: 1
+
+#11 [celery_worker internal] load build context
+#11 transferring context: 1.05MB 750.8s
+#11 transferring context: 1.05MB 751.0s done
+#11 CANCELED
+------
+ > [frontend deps 4/4] RUN npm ci:
+2.499 npm error
+2.499 npm error aliases: clean-install, ic, install-clean, isntall-clean
+2.499 npm error
+2.499 npm error Run "npm help ci" for more info
+2.502 npm notice
+2.502 npm notice New major version of npm available! 10.8.2 -> 12.0.2
+2.502 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.0.2
+2.502 npm notice To update run: npm install -g npm@12.0.2
+2.502 npm notice
+2.503 npm error A complete log of this run can be found in: /root/.npm/_logs/2026-08-22T12_51_24_248Z-debug-0.log
+------
+Dockerfile:4
+
+--------------------
+
+   2 |     WORKDIR /app
+
+   3 |     COPY package.json package-lock.json* ./
+
+   4 | >>> RUN npm ci
+
+   5 |     
+
+   6 |     FROM node:20-alpine AS builder
+
+--------------------
+
+target frontend: failed to solve: process "/bin/sh -c npm ci" did not complete successfully: exit code: 1
+

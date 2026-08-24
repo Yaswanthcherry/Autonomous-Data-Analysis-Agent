@@ -1,0 +1,668 @@
+time="2026-08-22T13:22:45Z" level=warning msg="/mnt/c/Users/YASWANTH/Desktop/analysis agent/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image analysisagent-celery_worker Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 620B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 476B 0.2s
+#2 transferring dockerfile: 478B 0.2s done
+#2 DONE 0.2s
+
+#3 [auth] library/python:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#4 [internal] load metadata for docker.io/library/python:3.11-slim
+#4 DONE 4.3s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 0.1s
+#5 transferring context: 2B 0.1s done
+#5 DONE 0.2s
+
+#6 [internal] load build context
+#6 DONE 0.0s
+
+#7 [1/7] FROM docker.io/library/python:3.11-slim@sha256:9c900dea9e8fb7e16277c179b555cc72d29a352dbc33cff48ad5a0412fd5bfc7
+#7 resolve docker.io/library/python:3.11-slim@sha256:9c900dea9e8fb7e16277c179b555cc72d29a352dbc33cff48ad5a0412fd5bfc7 0.1s done
+#7 DONE 0.1s
+
+#8 [2/7] WORKDIR /app
+#8 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 26.26kB 4.9s
+#6 transferring context: 52.44kB 10.0s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 0.833 Hit:1 http://deb.debian.org/debian trixie InRelease
+#9 0.838 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#9 1.012 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#9 1.430 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9673 kB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 76.62kB 15.0s
+#6 transferring context: 106.12kB 20.0s
+#6 transferring context: 128.06kB 25.1s
+#6 transferring context: 155.69kB 30.2s
+#6 transferring context: 189.47kB 35.3s
+#6 transferring context: 209.99kB 40.3s
+#6 transferring context: 230.73kB 45.3s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 46.61 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [4412 B]
+#9 46.64 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [247 kB]
+#9 48.14 Fetched 10.0 MB in 48s (209 kB/s)
+#9 48.14 Reading package lists...
+#9 48.95 Reading package lists...
+#9 49.59 Building dependency tree...
+#9 49.80 Reading state information...
+#9 50.16 The following additional packages will be installed:
+#9 50.16   binutils binutils-common binutils-x86-64-linux-gnu cpp cpp-14
+#9 50.16   cpp-14-x86-64-linux-gnu cpp-x86-64-linux-gnu gcc-14 gcc-14-x86-64-linux-gnu
+#9 50.16   gcc-x86-64-linux-gnu krb5-locales libasan8 libatomic1 libbinutils
+#9 50.16   libc-dev-bin libc6-dev libcc1-0 libcom-err2 libcrypt-dev libctf-nobfd0
+#9 50.16   libctf0 libgcc-14-dev libgprofng0 libgssapi-krb5-2 libhwasan0 libisl23
+#9 50.16   libitm1 libjansson4 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0
+#9 50.17   libldap-common libldap2 liblsan0 libmpc3 libmpfr6 libpq5 libquadmath0
+#9 50.17   libsasl2-2 libsasl2-modules libsasl2-modules-db libsframe1 libssl-dev
+#9 50.17   libtsan2 libubsan1 linux-libc-dev manpages manpages-dev rpcsvc-proto
+#9 50.17 Suggested packages:
+#9 50.17   binutils-doc gprofng-gui binutils-gold cpp-doc gcc-14-locales cpp-14-doc
+#9 50.17   gcc-multilib make autoconf automake libtool flex bison gdb gcc-doc
+#9 50.17   gcc-14-multilib gcc-14-doc gdb-x86-64-linux-gnu libc-devtools glibc-doc
+#9 50.17   krb5-doc krb5-user postgresql-doc-17 libsasl2-modules-gssapi-mit
+#9 50.17   | libsasl2-modules-gssapi-heimdal libsasl2-modules-ldap libsasl2-modules-otp
+#9 50.17   libsasl2-modules-sql libssl-doc man-browser
+#9 50.40 The following NEW packages will be installed:
+#9 50.40   binutils binutils-common binutils-x86-64-linux-gnu cpp cpp-14
+#9 50.40   cpp-14-x86-64-linux-gnu cpp-x86-64-linux-gnu gcc gcc-14
+#9 50.40   gcc-14-x86-64-linux-gnu gcc-x86-64-linux-gnu krb5-locales libasan8
+#9 50.40   libatomic1 libbinutils libc-dev-bin libc6-dev libcc1-0 libcom-err2
+#9 50.40   libcrypt-dev libctf-nobfd0 libctf0 libgcc-14-dev libgomp1 libgprofng0
+#9 50.40   libgssapi-krb5-2 libhwasan0 libisl23 libitm1 libjansson4 libk5crypto3
+#9 50.40   libkeyutils1 libkrb5-3 libkrb5support0 libldap-common libldap2 liblsan0
+#9 50.40   libmpc3 libmpfr6 libpq-dev libpq5 libquadmath0 libsasl2-2 libsasl2-modules
+#9 50.40   libsasl2-modules-db libsframe1 libssl-dev libtsan2 libubsan1 linux-libc-dev
+#9 50.40   manpages manpages-dev rpcsvc-proto
+#9 50.56 0 upgraded, 53 newly installed, 0 to remove and 9 not upgraded.
+#9 50.56 Need to get 65.0 MB of archives.
+#9 50.56 After this operation, 244 MB of additional disk space will be used.
+#9 50.56 Get:1 http://deb.debian.org/debian trixie/main amd64 krb5-locales all 1.21.3-5+deb13u1 [101 kB]
+#9 50.66 Get:2 http://deb.debian.org/debian trixie/main amd64 manpages all 6.9.1-1 [1393 kB]
+#9 52.17 Get:3 http://deb.debian.org/debian trixie/main amd64 libsframe1 amd64 2.44-3 [78.4 kB]
+#9 52.58 Get:4 http://deb.debian.org/debian trixie/main amd64 binutils-common amd64 2.44-3 [2509 kB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 266.21kB 53.9s
+#6 transferring context: 289.70kB 58.9s
+#6 transferring context: 313.42kB 64.0s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 67.00 Get:5 http://deb.debian.org/debian trixie/main amd64 libbinutils amd64 2.44-3 [534 kB]
+#9 69.62 Get:6 http://deb.debian.org/debian trixie/main amd64 libgprofng0 amd64 2.44-3 [808 kB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 344.07kB 72.2s
+#6 transferring context: 367.68kB 77.2s
+#6 transferring context: 385.65kB 82.3s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 73.32 Get:7 http://deb.debian.org/debian trixie/main amd64 libctf-nobfd0 amd64 2.44-3 [156 kB]
+#9 74.50 Get:8 http://deb.debian.org/debian trixie/main amd64 libctf0 amd64 2.44-3 [88.6 kB]
+#9 75.21 Get:9 http://deb.debian.org/debian trixie/main amd64 libjansson4 amd64 2.14-2+b3 [39.8 kB]
+#9 75.41 Get:10 http://deb.debian.org/debian trixie/main amd64 binutils-x86-64-linux-gnu amd64 2.44-3 [1014 kB]
+#9 81.06 Get:11 http://deb.debian.org/debian trixie/main amd64 binutils amd64 2.44-3 [265 kB]
+#9 82.50 Get:12 http://deb.debian.org/debian trixie/main amd64 libisl23 amd64 0.27-1 [659 kB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 407.51kB 87.3s
+#6 transferring context: 428.64kB 92.4s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 85.74 Get:13 http://deb.debian.org/debian trixie/main amd64 libmpfr6 amd64 4.2.2-1 [729 kB]
+#9 90.41 Get:14 http://deb.debian.org/debian trixie/main amd64 libmpc3 amd64 1.3.1-1+b3 [52.2 kB]
+#9 90.57 Get:15 http://deb.debian.org/debian trixie/main amd64 cpp-14-x86-64-linux-gnu amd64 14.2.0-19 [11.0 MB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 453.13kB 97.4s
+#6 transferring context: 481.41kB 102.4s
+#6 transferring context: 513.24kB 107.4s
+#6 transferring context: 548.04kB 112.5s
+#6 transferring context: 577.32kB 117.5s
+#6 transferring context: 602.74kB 122.6s
+#6 transferring context: 630.45kB 127.6s
+#6 transferring context: 661.93kB 132.6s
+#6 transferring context: 688.16kB 137.7s
+#6 transferring context: 714.89kB 142.7s
+#6 transferring context: 737.43kB 147.8s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 148.7 Get:16 http://deb.debian.org/debian trixie/main amd64 cpp-14 amd64 14.2.0-19 [1280 B]
+#9 148.7 Get:17 http://deb.debian.org/debian trixie/main amd64 cpp-x86-64-linux-gnu amd64 4:14.2.0-1 [4840 B]
+#9 148.8 Get:18 http://deb.debian.org/debian trixie/main amd64 cpp amd64 4:14.2.0-1 [1568 B]
+#9 148.8 Get:19 http://deb.debian.org/debian trixie/main amd64 libcc1-0 amd64 14.2.0-19 [42.8 kB]
+#9 149.0 Get:20 http://deb.debian.org/debian trixie/main amd64 libgomp1 amd64 14.2.0-19 [137 kB]
+#9 149.8 Get:21 http://deb.debian.org/debian trixie/main amd64 libitm1 amd64 14.2.0-19 [26.0 kB]
+#9 149.9 Get:22 http://deb.debian.org/debian trixie/main amd64 libatomic1 amd64 14.2.0-19 [9308 B]
+#9 149.9 Get:23 http://deb.debian.org/debian trixie/main amd64 libasan8 amd64 14.2.0-19 [2725 kB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 765.87kB 154.6s
+#6 transferring context: 785.28kB 159.6s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 164.2 Get:24 http://deb.debian.org/debian trixie/main amd64 liblsan0 amd64 14.2.0-19 [1204 kB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 829.78kB 169.4s
+#6 transferring context: 851.35kB 174.4s
+#6 transferring context: 872.50kB 179.5s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 170.8 Get:25 http://deb.debian.org/debian trixie/main amd64 libtsan2 amd64 14.2.0-19 [2460 kB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 889.81kB 184.5s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 188.4 Get:26 http://deb.debian.org/debian trixie/main amd64 libubsan1 amd64 14.2.0-19 [1074 kB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 928.28kB 193.7s
+#6 transferring context: 951.61kB 198.7s
+#6 transferring context: 981.13kB 203.8s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 194.3 Get:27 http://deb.debian.org/debian trixie/main amd64 libhwasan0 amd64 14.2.0-19 [1488 kB]
+#9 202.4 Get:28 http://deb.debian.org/debian trixie/main amd64 libquadmath0 amd64 14.2.0-19 [145 kB]
+#9 203.1 Get:29 http://deb.debian.org/debian trixie/main amd64 libgcc-14-dev amd64 14.2.0-19 [2672 kB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 1.01MB 208.8s
+#6 transferring context: 1.03MB 213.8s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 217.8 Get:30 http://deb.debian.org/debian trixie/main amd64 gcc-14-x86-64-linux-gnu amd64 14.2.0-19 [21.4 MB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 1.07MB 222.9s
+#6 transferring context: 1.10MB 228.0s
+#6 transferring context: 1.13MB 233.0s
+#6 transferring context: 1.14MB 238.0s
+#6 transferring context: 1.16MB 243.1s
+#6 transferring context: 1.17MB 248.2s
+#6 transferring context: 1.19MB 253.3s
+#6 transferring context: 1.21MB 258.3s
+#6 transferring context: 1.22MB 263.3s
+#6 transferring context: 1.24MB 268.4s
+#6 transferring context: 1.25MB 273.4s
+#6 transferring context: 1.27MB 278.5s
+#6 transferring context: 1.28MB 283.6s
+#6 transferring context: 1.30MB 288.7s
+#6 transferring context: 1.31MB 293.7s
+#6 transferring context: 1.33MB 298.7s
+#6 transferring context: 1.34MB 303.8s
+#6 transferring context: 1.36MB 308.8s
+#6 transferring context: 1.37MB 313.9s
+#6 transferring context: 1.39MB 319.0s
+#6 transferring context: 1.40MB 324.1s
+#6 transferring context: 1.42MB 329.1s
+#6 transferring context: 1.43MB 334.3s
+#6 transferring context: 1.45MB 339.3s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 342.9 Get:31 http://deb.debian.org/debian trixie/main amd64 gcc-14 amd64 14.2.0-19 [540 kB]
+#9 346.8 Get:32 http://deb.debian.org/debian trixie/main amd64 gcc-x86-64-linux-gnu amd64 4:14.2.0-1 [1436 B]
+#9 346.8 Get:33 http://deb.debian.org/debian trixie/main amd64 gcc amd64 4:14.2.0-1 [5136 B]
+#9 346.8 Get:34 http://deb.debian.org/debian trixie/main amd64 libc-dev-bin amd64 2.41-12+deb13u3 [59.8 kB]
+#9 347.1 Get:35 http://deb.debian.org/debian-security trixie-security/main amd64 linux-libc-dev all 6.12.101-1 [2901 kB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 1.48MB 348.5s
+#6 transferring context: 1.49MB 353.6s
+#6 transferring context: 1.51MB 358.7s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 363.0 Get:36 http://deb.debian.org/debian trixie/main amd64 libcrypt-dev amd64 1:4.4.38-1 [119 kB]
+#9 363.5 Get:37 http://deb.debian.org/debian trixie/main amd64 rpcsvc-proto amd64 1.4.3-1 [63.3 kB]
+#9 363.6 Get:38 http://deb.debian.org/debian trixie/main amd64 libc6-dev amd64 2.41-12+deb13u3 [1992 kB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 1.54MB 368.4s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 372.3 Get:39 http://deb.debian.org/debian trixie/main amd64 libcom-err2 amd64 1.47.2-3+b11 [25.0 kB]
+#9 372.4 Get:40 http://deb.debian.org/debian trixie/main amd64 libkrb5support0 amd64 1.21.3-5+deb13u1 [33.1 kB]
+#9 372.6 Get:41 http://deb.debian.org/debian trixie/main amd64 libk5crypto3 amd64 1.21.3-5+deb13u1 [81.2 kB]
+#9 373.3 Get:42 http://deb.debian.org/debian trixie/main amd64 libkeyutils1 amd64 1.6.3-6 [9456 B]
+#9 373.4 Get:43 http://deb.debian.org/debian trixie/main amd64 libkrb5-3 amd64 1.21.3-5+deb13u1 [326 kB]
+#9 375.2 Get:44 http://deb.debian.org/debian trixie/main amd64 libgssapi-krb5-2 amd64 1.21.3-5+deb13u1 [138 kB]
+#9 376.0 Get:45 http://deb.debian.org/debian trixie/main amd64 libldap-common all 2.6.10+dfsg-1 [35.1 kB]
+#9 376.4 Get:46 http://deb.debian.org/debian trixie/main amd64 libsasl2-modules-db amd64 2.1.28+dfsg1-9 [19.8 kB]
+#9 376.4 Get:47 http://deb.debian.org/debian trixie/main amd64 libsasl2-2 amd64 2.1.28+dfsg1-9 [57.5 kB]
+#9 376.7 Get:48 http://deb.debian.org/debian trixie/main amd64 libldap2 amd64 2.6.10+dfsg-1 [194 kB]
+#9 377.5 Get:49 http://deb.debian.org/debian-security trixie-security/main amd64 libpq5 amd64 17.11-0+deb13u1 [237 kB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 1.57MB 378.5s
+#6 transferring context: 1.59MB 383.5s
+#6 transferring context: 1.60MB 388.6s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 379.2 Get:50 http://deb.debian.org/debian trixie/main amd64 libssl-dev amd64 3.5.6-1~deb13u2 [2959 kB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 1.62MB 393.7s
+#6 transferring context: 1.64MB 398.8s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 399.8 Get:51 http://deb.debian.org/debian-security trixie-security/main amd64 libpq-dev amd64 17.11-0+deb13u1 [159 kB]
+#9 401.2 Get:52 http://deb.debian.org/debian trixie/main amd64 libsasl2-modules amd64 2.1.28+dfsg1-9 [66.7 kB]
+#9 401.7 Get:53 http://deb.debian.org/debian trixie/main amd64 manpages-dev all 6.9.1-1 [2122 kB]
+#9 ...
+
+#6 [internal] load build context
+#6 transferring context: 1.66MB 405.1s
+#6 transferring context: 1.68MB 410.2s
+#6 ...
+
+#9 [3/7] RUN apt-get update && apt-get install -y     gcc     libpq-dev     libgomp1     && rm -rf /var/lib/apt/lists/*
+#9 411.6 debconf: unable to initialize frontend: Dialog
+#9 411.6 debconf: (TERM is not set, so the dialog frontend is not usable.)
+#9 411.6 debconf: falling back to frontend: Readline
+#9 411.6 debconf: unable to initialize frontend: Readline
+#9 411.6 debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8, <STDIN> line 53.)
+#9 411.6 debconf: falling back to frontend: Teletype
+#9 411.6 debconf: unable to initialize frontend: Teletype
+#9 411.6 debconf: (This frontend requires a controlling tty.)
+#9 411.6 debconf: falling back to frontend: Noninteractive
+#9 413.0 Fetched 65.0 MB in 6min 1s (180 kB/s)
+#9 413.1 Selecting previously unselected package krb5-locales.
+#9 413.1 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 5645 files and directories currently installed.)
+#9 413.1 Preparing to unpack .../00-krb5-locales_1.21.3-5+deb13u1_all.deb ...
+#9 413.1 Unpacking krb5-locales (1.21.3-5+deb13u1) ...
+#9 413.1 Selecting previously unselected package manpages.
+#9 413.1 Preparing to unpack .../01-manpages_6.9.1-1_all.deb ...
+#9 413.2 Unpacking manpages (6.9.1-1) ...
+#9 413.2 Selecting previously unselected package libsframe1:amd64.
+#9 413.2 Preparing to unpack .../02-libsframe1_2.44-3_amd64.deb ...
+#9 413.2 Unpacking libsframe1:amd64 (2.44-3) ...
+#9 413.3 Selecting previously unselected package binutils-common:amd64.
+#9 413.3 Preparing to unpack .../03-binutils-common_2.44-3_amd64.deb ...
+#9 413.3 Unpacking binutils-common:amd64 (2.44-3) ...
+#9 413.5 Selecting previously unselected package libbinutils:amd64.
+#9 413.5 Preparing to unpack .../04-libbinutils_2.44-3_amd64.deb ...
+#9 413.5 Unpacking libbinutils:amd64 (2.44-3) ...
+#9 413.6 Selecting previously unselected package libgprofng0:amd64.
+#9 413.6 Preparing to unpack .../05-libgprofng0_2.44-3_amd64.deb ...
+#9 413.6 Unpacking libgprofng0:amd64 (2.44-3) ...
+#9 413.7 Selecting previously unselected package libctf-nobfd0:amd64.
+#9 413.7 Preparing to unpack .../06-libctf-nobfd0_2.44-3_amd64.deb ...
+#9 413.7 Unpacking libctf-nobfd0:amd64 (2.44-3) ...
+#9 413.7 Selecting previously unselected package libctf0:amd64.
+#9 413.7 Preparing to unpack .../07-libctf0_2.44-3_amd64.deb ...
+#9 413.7 Unpacking libctf0:amd64 (2.44-3) ...
+#9 413.8 Selecting previously unselected package libjansson4:amd64.
+#9 413.8 Preparing to unpack .../08-libjansson4_2.14-2+b3_amd64.deb ...
+#9 413.8 Unpacking libjansson4:amd64 (2.14-2+b3) ...
+#9 413.8 Selecting previously unselected package binutils-x86-64-linux-gnu.
+#9 413.8 Preparing to unpack .../09-binutils-x86-64-linux-gnu_2.44-3_amd64.deb ...
+#9 413.8 Unpacking binutils-x86-64-linux-gnu (2.44-3) ...
+#9 413.9 Selecting previously unselected package binutils.
+#9 413.9 Preparing to unpack .../10-binutils_2.44-3_amd64.deb ...
+#9 413.9 Unpacking binutils (2.44-3) ...
+#9 414.0 Selecting previously unselected package libisl23:amd64.
+#9 414.0 Preparing to unpack .../11-libisl23_0.27-1_amd64.deb ...
+#9 414.0 Unpacking libisl23:amd64 (0.27-1) ...
+#9 414.1 Selecting previously unselected package libmpfr6:amd64.
+#9 414.1 Preparing to unpack .../12-libmpfr6_4.2.2-1_amd64.deb ...
+#9 414.1 Unpacking libmpfr6:amd64 (4.2.2-1) ...
+#9 414.1 Selecting previously unselected package libmpc3:amd64.
+#9 414.1 Preparing to unpack .../13-libmpc3_1.3.1-1+b3_amd64.deb ...
+#9 414.1 Unpacking libmpc3:amd64 (1.3.1-1+b3) ...
+#9 414.1 Selecting previously unselected package cpp-14-x86-64-linux-gnu.
+#9 414.1 Preparing to unpack .../14-cpp-14-x86-64-linux-gnu_14.2.0-19_amd64.deb ...
+#9 414.2 Unpacking cpp-14-x86-64-linux-gnu (14.2.0-19) ...
+#9 414.8 Selecting previously unselected package cpp-14.
+#9 414.8 Preparing to unpack .../15-cpp-14_14.2.0-19_amd64.deb ...
+#9 414.8 Unpacking cpp-14 (14.2.0-19) ...
+#9 414.8 Selecting previously unselected package cpp-x86-64-linux-gnu.
+#9 414.8 Preparing to unpack .../16-cpp-x86-64-linux-gnu_4%3a14.2.0-1_amd64.deb ...
+#9 414.8 Unpacking cpp-x86-64-linux-gnu (4:14.2.0-1) ...
+#9 414.9 Selecting previously unselected package cpp.
+#9 414.9 Preparing to unpack .../17-cpp_4%3a14.2.0-1_amd64.deb ...
+#9 414.9 Unpacking cpp (4:14.2.0-1) ...
+#9 414.9 Selecting previously unselected package libcc1-0:amd64.
+#9 414.9 Preparing to unpack .../18-libcc1-0_14.2.0-19_amd64.deb ...
+#9 414.9 Unpacking libcc1-0:amd64 (14.2.0-19) ...
+#9 414.9 Selecting previously unselected package libgomp1:amd64.
+#9 414.9 Preparing to unpack .../19-libgomp1_14.2.0-19_amd64.deb ...
+#9 414.9 Unpacking libgomp1:amd64 (14.2.0-19) ...
+#9 415.0 Selecting previously unselected package libitm1:amd64.
+#9 415.0 Preparing to unpack .../20-libitm1_14.2.0-19_amd64.deb ...
+#9 415.0 Unpacking libitm1:amd64 (14.2.0-19) ...
+#9 415.0 Selecting previously unselected package libatomic1:amd64.
+#9 415.0 Preparing to unpack .../21-libatomic1_14.2.0-19_amd64.deb ...
+#9 415.0 Unpacking libatomic1:amd64 (14.2.0-19) ...
+#9 415.1 Selecting previously unselected package libasan8:amd64.
+#9 415.1 Preparing to unpack .../22-libasan8_14.2.0-19_amd64.deb ...
+#9 415.1 Unpacking libasan8:amd64 (14.2.0-19) ...
+#9 415.3 Selecting previously unselected package liblsan0:amd64.
+#9 415.3 Preparing to unpack .../23-liblsan0_14.2.0-19_amd64.deb ...
+#9 415.3 Unpacking liblsan0:amd64 (14.2.0-19) ...
+#9 415.4 Selecting previously unselected package libtsan2:amd64.
+#9 415.4 Preparing to unpack .../24-libtsan2_14.2.0-19_amd64.deb ...
+#9 415.4 Unpacking libtsan2:amd64 (14.2.0-19) ...
+#9 415.6 Selecting previously unselected package libubsan1:amd64.
+#9 415.6 Preparing to unpack .../25-libubsan1_14.2.0-19_amd64.deb ...
+#9 415.6 Unpacking libubsan1:amd64 (14.2.0-19) ...
+#9 415.7 Selecting previously unselected package libhwasan0:amd64.
+#9 415.7 Preparing to unpack .../26-libhwasan0_14.2.0-19_amd64.deb ...
+#9 415.7 Unpacking libhwasan0:amd64 (14.2.0-19) ...
+#9 415.9 Selecting previously unselected package libquadmath0:amd64.
+#9 415.9 Preparing to unpack .../27-libquadmath0_14.2.0-19_amd64.deb ...
+#9 415.9 Unpacking libquadmath0:amd64 (14.2.0-19) ...
+#9 416.0 Selecting previously unselected package libgcc-14-dev:amd64.
+#9 416.0 Preparing to unpack .../28-libgcc-14-dev_14.2.0-19_amd64.deb ...
+#9 416.0 Unpacking libgcc-14-dev:amd64 (14.2.0-19) ...
+#9 416.2 Selecting previously unselected package gcc-14-x86-64-linux-gnu.
+#9 416.2 Preparing to unpack .../29-gcc-14-x86-64-linux-gnu_14.2.0-19_amd64.deb ...
+#9 416.2 Unpacking gcc-14-x86-64-linux-gnu (14.2.0-19) ...
+#9 416.8 Selecting previously unselected package gcc-14.
+#9 416.8 Preparing to unpack .../30-gcc-14_14.2.0-19_amd64.deb ...
+#9 416.9 Unpacking gcc-14 (14.2.0-19) ...
+#9 416.9 Selecting previously unselected package gcc-x86-64-linux-gnu.
+#9 416.9 Preparing to unpack .../31-gcc-x86-64-linux-gnu_4%3a14.2.0-1_amd64.deb ...
+#9 416.9 Unpacking gcc-x86-64-linux-gnu (4:14.2.0-1) ...
+#9 416.9 Selecting previously unselected package gcc.
+#9 416.9 Preparing to unpack .../32-gcc_4%3a14.2.0-1_amd64.deb ...
+#9 416.9 Unpacking gcc (4:14.2.0-1) ...
+#9 417.0 Selecting previously unselected package libc-dev-bin.
+#9 417.0 Preparing to unpack .../33-libc-dev-bin_2.41-12+deb13u3_amd64.deb ...
+#9 417.0 Unpacking libc-dev-bin (2.41-12+deb13u3) ...
+#9 417.0 Selecting previously unselected package linux-libc-dev.
+#9 417.0 Preparing to unpack .../34-linux-libc-dev_6.12.101-1_all.deb ...
+#9 417.0 Unpacking linux-libc-dev (6.12.101-1) ...
+#9 417.2 Selecting previously unselected package libcrypt-dev:amd64.
+#9 417.2 Preparing to unpack .../35-libcrypt-dev_1%3a4.4.38-1_amd64.deb ...
+#9 417.3 Unpacking libcrypt-dev:amd64 (1:4.4.38-1) ...
+#9 417.3 Selecting previously unselected package rpcsvc-proto.
+#9 417.3 Preparing to unpack .../36-rpcsvc-proto_1.4.3-1_amd64.deb ...
+#9 417.3 Unpacking rpcsvc-proto (1.4.3-1) ...
+#9 417.3 Selecting previously unselected package libc6-dev:amd64.
+#9 417.3 Preparing to unpack .../37-libc6-dev_2.41-12+deb13u3_amd64.deb ...
+#9 417.3 Unpacking libc6-dev:amd64 (2.41-12+deb13u3) ...
+#9 417.5 Selecting previously unselected package libcom-err2:amd64.
+#9 417.5 Preparing to unpack .../38-libcom-err2_1.47.2-3+b11_amd64.deb ...
+#9 417.5 Unpacking libcom-err2:amd64 (1.47.2-3+b11) ...
+#9 417.6 Selecting previously unselected package libkrb5support0:amd64.
+#9 417.6 Preparing to unpack .../39-libkrb5support0_1.21.3-5+deb13u1_amd64.deb ...
+#9 417.6 Unpacking libkrb5support0:amd64 (1.21.3-5+deb13u1) ...
+#9 417.6 Selecting previously unselected package libk5crypto3:amd64.
+#9 417.6 Preparing to unpack .../40-libk5crypto3_1.21.3-5+deb13u1_amd64.deb ...
+#9 417.6 Unpacking libk5crypto3:amd64 (1.21.3-5+deb13u1) ...
+#9 417.7 Selecting previously unselected package libkeyutils1:amd64.
+#9 417.7 Preparing to unpack .../41-libkeyutils1_1.6.3-6_amd64.deb ...
+#9 417.7 Unpacking libkeyutils1:amd64 (1.6.3-6) ...
+#9 417.7 Selecting previously unselected package libkrb5-3:amd64.
+#9 417.7 Preparing to unpack .../42-libkrb5-3_1.21.3-5+deb13u1_amd64.deb ...
+#9 417.7 Unpacking libkrb5-3:amd64 (1.21.3-5+deb13u1) ...
+#9 417.8 Selecting previously unselected package libgssapi-krb5-2:amd64.
+#9 417.8 Preparing to unpack .../43-libgssapi-krb5-2_1.21.3-5+deb13u1_amd64.deb ...
+#9 417.8 Unpacking libgssapi-krb5-2:amd64 (1.21.3-5+deb13u1) ...
+#9 417.8 Selecting previously unselected package libldap-common.
+#9 417.8 Preparing to unpack .../44-libldap-common_2.6.10+dfsg-1_all.deb ...
+#9 417.9 Unpacking libldap-common (2.6.10+dfsg-1) ...
+#9 417.9 Selecting previously unselected package libsasl2-modules-db:amd64.
+#9 417.9 Preparing to unpack .../45-libsasl2-modules-db_2.1.28+dfsg1-9_amd64.deb ...
+#9 417.9 Unpacking libsasl2-modules-db:amd64 (2.1.28+dfsg1-9) ...
+#9 417.9 Selecting previously unselected package libsasl2-2:amd64.
+#9 417.9 Preparing to unpack .../46-libsasl2-2_2.1.28+dfsg1-9_amd64.deb ...
+#9 417.9 Unpacking libsasl2-2:amd64 (2.1.28+dfsg1-9) ...
+#9 418.0 Selecting previously unselected package libldap2:amd64.
+#9 418.0 Preparing to unpack .../47-libldap2_2.6.10+dfsg-1_amd64.deb ...
+#9 418.0 Unpacking libldap2:amd64 (2.6.10+dfsg-1) ...
+#9 418.0 Selecting previously unselected package libpq5:amd64.
+#9 418.0 Preparing to unpack .../48-libpq5_17.11-0+deb13u1_amd64.deb ...
+#9 418.0 Unpacking libpq5:amd64 (17.11-0+deb13u1) ...
+#9 418.1 Selecting previously unselected package libssl-dev:amd64.
+#9 418.1 Preparing to unpack .../49-libssl-dev_3.5.6-1~deb13u2_amd64.deb ...
+#9 418.1 Unpacking libssl-dev:amd64 (3.5.6-1~deb13u2) ...
+#9 418.3 Selecting previously unselected package libpq-dev.
+#9 418.3 Preparing to unpack .../50-libpq-dev_17.11-0+deb13u1_amd64.deb ...
+#9 418.3 Unpacking libpq-dev (17.11-0+deb13u1) ...
+#9 418.4 Selecting previously unselected package libsasl2-modules:amd64.
+#9 418.4 Preparing to unpack .../51-libsasl2-modules_2.1.28+dfsg1-9_amd64.deb ...
+#9 418.4 Unpacking libsasl2-modules:amd64 (2.1.28+dfsg1-9) ...
+#9 418.4 Selecting previously unselected package manpages-dev.
+#9 418.4 Preparing to unpack .../52-manpages-dev_6.9.1-1_all.deb ...
+#9 418.4 Unpacking manpages-dev (6.9.1-1) ...
+#9 418.6 Setting up libkeyutils1:amd64 (1.6.3-6) ...
+#9 418.6 Setting up manpages (6.9.1-1) ...
+#9 418.6 Setting up libsasl2-modules:amd64 (2.1.28+dfsg1-9) ...
+#9 418.6 Setting up binutils-common:amd64 (2.44-3) ...
+#9 418.7 Setting up linux-libc-dev (6.12.101-1) ...
+#9 418.7 Setting up libctf-nobfd0:amd64 (2.44-3) ...
+#9 418.7 Setting up krb5-locales (1.21.3-5+deb13u1) ...
+#9 418.7 Setting up libcom-err2:amd64 (1.47.2-3+b11) ...
+#9 418.7 Setting up libgomp1:amd64 (14.2.0-19) ...
+#9 418.7 Setting up libldap-common (2.6.10+dfsg-1) ...
+#9 418.8 Setting up libsframe1:amd64 (2.44-3) ...
+#9 418.8 Setting up libjansson4:amd64 (2.14-2+b3) ...
+#9 418.8 Setting up libkrb5support0:amd64 (1.21.3-5+deb13u1) ...
+#9 418.8 Setting up libsasl2-modules-db:amd64 (2.1.28+dfsg1-9) ...
+#9 418.8 Setting up rpcsvc-proto (1.4.3-1) ...
+#9 418.9 Setting up libmpfr6:amd64 (4.2.2-1) ...
+#9 418.9 Setting up libquadmath0:amd64 (14.2.0-19) ...
+#9 418.9 Setting up libssl-dev:amd64 (3.5.6-1~deb13u2) ...
+#9 418.9 Setting up libmpc3:amd64 (1.3.1-1+b3) ...
+#9 418.9 Setting up libatomic1:amd64 (14.2.0-19) ...
+#9 418.9 Setting up libk5crypto3:amd64 (1.21.3-5+deb13u1) ...
+#9 418.9 Setting up libsasl2-2:amd64 (2.1.28+dfsg1-9) ...
+#9 419.0 Setting up libubsan1:amd64 (14.2.0-19) ...
+#9 419.0 Setting up libhwasan0:amd64 (14.2.0-19) ...
+#9 419.0 Setting up libcrypt-dev:amd64 (1:4.4.38-1) ...
+#9 419.0 Setting up libasan8:amd64 (14.2.0-19) ...
+#9 419.0 Setting up libkrb5-3:amd64 (1.21.3-5+deb13u1) ...
+#9 419.0 Setting up libtsan2:amd64 (14.2.0-19) ...
+#9 419.0 Setting up libbinutils:amd64 (2.44-3) ...
+#9 419.1 Setting up libisl23:amd64 (0.27-1) ...
+#9 419.1 Setting up libc-dev-bin (2.41-12+deb13u3) ...
+#9 419.1 Setting up libcc1-0:amd64 (14.2.0-19) ...
+#9 419.1 Setting up libldap2:amd64 (2.6.10+dfsg-1) ...
+#9 419.1 Setting up liblsan0:amd64 (14.2.0-19) ...
+#9 419.1 Setting up libitm1:amd64 (14.2.0-19) ...
+#9 419.1 Setting up libctf0:amd64 (2.44-3) ...
+#9 419.1 Setting up manpages-dev (6.9.1-1) ...
+#9 419.2 Setting up libgprofng0:amd64 (2.44-3) ...
+#9 419.2 Setting up libgssapi-krb5-2:amd64 (1.21.3-5+deb13u1) ...
+#9 419.2 Setting up cpp-14-x86-64-linux-gnu (14.2.0-19) ...
+#9 419.2 Setting up cpp-14 (14.2.0-19) ...
+#9 419.2 Setting up libc6-dev:amd64 (2.41-12+deb13u3) ...
+#9 419.2 Setting up libgcc-14-dev:amd64 (14.2.0-19) ...
+#9 419.2 Setting up binutils-x86-64-linux-gnu (2.44-3) ...
+#9 419.2 Setting up cpp-x86-64-linux-gnu (4:14.2.0-1) ...
+#9 419.3 Setting up libpq5:amd64 (17.11-0+deb13u1) ...
+#9 419.3 Setting up libpq-dev (17.11-0+deb13u1) ...
+#9 419.3 Setting up binutils (2.44-3) ...
+#9 419.3 Setting up cpp (4:14.2.0-1) ...
+#9 419.3 Setting up gcc-14-x86-64-linux-gnu (14.2.0-19) ...
+#9 419.3 Setting up gcc-x86-64-linux-gnu (4:14.2.0-1) ...
+#9 419.4 Setting up gcc-14 (14.2.0-19) ...
+#9 419.4 Setting up gcc (4:14.2.0-1) ...
+#9 419.4 Processing triggers for libc-bin (2.41-12+deb13u3) ...
+#9 DONE 419.7s
+
+#6 [internal] load build context
+#6 transferring context: 1.72MB 419.7s
+#6 transferring context: 1.74MB 424.8s
+#6 transferring context: 1.77MB 429.8s
+#6 transferring context: 1.79MB 434.9s
+#6 transferring context: 1.83MB 440.0s
+#6 transferring context: 1.86MB 445.0s
+#6 transferring context: 1.89MB 450.2s
+#6 transferring context: 1.90MB 455.3s
+#6 transferring context: 1.91MB 460.4s
+#6 transferring context: 1.93MB 465.4s
+#6 transferring context: 1.95MB 470.5s
+#6 transferring context: 1.97MB 475.5s
+#6 transferring context: 2.00MB 480.6s
+#6 transferring context: 2.03MB 485.7s
+#6 transferring context: 2.05MB 490.7s
+#6 transferring context: 2.07MB 495.7s
+#6 transferring context: 2.09MB 500.8s
+#6 transferring context: 2.12MB 505.9s
+#6 transferring context: 2.14MB 510.9s
+#6 transferring context: 2.16MB 516.0s
+#6 transferring context: 2.21MB 521.0s
+#6 transferring context: 2.22MB 526.0s
+#6 transferring context: 2.24MB 531.1s
+#6 transferring context: 2.26MB 536.2s
+#6 transferring context: 2.28MB 541.4s
+#6 transferring context: 2.30MB 545.2s done
+#6 DONE 545.2s
+
+#10 [4/7] COPY requirements.txt .
+#10 DONE 0.1s
+
+#11 [5/7] RUN pip install --no-cache-dir --upgrade pip     && pip install --no-cache-dir -r requirements.txt
+#11 1.286 Requirement already satisfied: pip in /usr/local/lib/python3.11/site-packages (24.0)
+#11 2.177 Collecting pip
+#11 2.845   Downloading pip-26.2.1-py3-none-any.whl.metadata (4.6 kB)
+#11 2.908 Downloading pip-26.2.1-py3-none-any.whl (1.8 MB)
+#11 12.42    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 190.1 kB/s eta 0:00:00
+#11 12.49 Installing collected packages: pip
+#11 12.49   Attempting uninstall: pip
+#11 12.49     Found existing installation: pip 24.0
+#11 12.54     Uninstalling pip-24.0:
+#11 12.71       Successfully uninstalled pip-24.0
+#11 13.50 Successfully installed pip-26.2.1
+#11 13.50 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#11 14.48 Collecting amqp==5.3.1 (from -r requirements.txt (line 1))
+#11 14.61   Downloading amqp-5.3.1-py3-none-any.whl.metadata (8.9 kB)
+#11 14.68 Collecting aiosqlite==0.22.1 (from -r requirements.txt (line 2))
+#11 14.72   Downloading aiosqlite-0.22.1-py3-none-any.whl.metadata (4.3 kB)
+#11 14.77 Collecting annotated-doc==0.0.4 (from -r requirements.txt (line 3))
+#11 14.81   Downloading annotated_doc-0.0.4-py3-none-any.whl.metadata (6.6 kB)
+#11 15.14 Collecting annotated-types==0.7.0 (from -r requirements.txt (line 4))
+#11 15.18   Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+#11 15.31 Collecting anyio==4.14.2 (from -r requirements.txt (line 5))
+#11 15.36   Downloading anyio-4.14.2-py3-none-any.whl.metadata (4.6 kB)
+#11 15.55 Collecting bcrypt==5.0.0 (from -r requirements.txt (line 6))
+#11 15.58   Downloading bcrypt-5.0.0-cp39-abi3-manylinux_2_34_x86_64.whl.metadata (10 kB)
+#11 15.71 Collecting billiard==4.2.4 (from -r requirements.txt (line 7))
+#11 16.00   Downloading billiard-4.2.4-py3-none-any.whl.metadata (4.8 kB)
+#11 16.35 Collecting celery==5.6.3 (from -r requirements.txt (line 8))
+#11 16.39   Downloading celery-5.6.3-py3-none-any.whl.metadata (23 kB)
+#11 16.86 Collecting certifi==2026.6.17 (from -r requirements.txt (line 9))
+#11 16.90   Downloading certifi-2026.6.17-py3-none-any.whl.metadata (2.5 kB)
+#11 19.50 Collecting charset-normalizer==3.4.9 (from -r requirements.txt (line 10))
+#11 19.54   Downloading charset_normalizer-3.4.9-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (41 kB)
+#11 19.76 Collecting click==8.4.2 (from -r requirements.txt (line 11))
+#11 19.80   Downloading click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+#11 19.86 Collecting click-didyoumean==0.3.1 (from -r requirements.txt (line 12))
+#11 19.90   Downloading click_didyoumean-0.3.1-py3-none-any.whl.metadata (3.9 kB)
+#11 19.96 Collecting click-plugins==1.1.1.2 (from -r requirements.txt (line 13))
+#11 20.00   Downloading click_plugins-1.1.1.2-py2.py3-none-any.whl.metadata (6.5 kB)
+#11 20.07 Collecting click-repl==0.3.0 (from -r requirements.txt (line 14))
+#11 20.37   Downloading click_repl-0.3.0-py3-none-any.whl.metadata (3.6 kB)
+#11 20.78 Collecting colorama==0.4.6 (from -r requirements.txt (line 15))
+#11 20.82   Downloading colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+#11 20.97 Collecting distro==1.9.0 (from -r requirements.txt (line 16))
+#11 21.00   Downloading distro-1.9.0-py3-none-any.whl.metadata (6.8 kB)
+#11 21.34 Collecting ecdsa==0.19.2 (from -r requirements.txt (line 17))
+#11 21.38   Downloading ecdsa-0.19.2-py2.py3-none-any.whl.metadata (29 kB)
+#11 21.55 Collecting email-validator==2.0.0 (from -r requirements.txt (line 18))
+#11 21.59   Downloading email_validator-2.0.0-py3-none-any.whl.metadata (25 kB)
+#11 22.20 Collecting fastapi==0.139.0 (from -r requirements.txt (line 19))
+#11 22.23   Downloading fastapi-0.139.0-py3-none-any.whl.metadata (26 kB)
+#11 25.05 Collecting greenlet==3.5.3 (from -r requirements.txt (line 20))
+#11 25.08   Downloading greenlet-3.5.3-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+#11 25.18 Collecting h11==0.16.0 (from -r requirements.txt (line 21))
+#11 25.47   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#11 25.69 Collecting httpcore==1.0.9 (from -r requirements.txt (line 22))
+#11 25.74   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#11 25.99 Collecting httpx==0.28.1 (from -r requirements.txt (line 23))
+#11 26.03   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#11 26.15 Collecting idna==3.18 (from -r requirements.txt (line 24))
+#11 26.20   Downloading idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+#11 26.38 Collecting iniconfig==2.3.0 (from -r requirements.txt (line 25))
+#11 26.43   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+#11 27.51 Collecting jiter==0.16.0 (from -r requirements.txt (line 26))
+#11 27.55   Downloading jiter-0.16.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.2 kB)
+#11 27.78 Collecting joblib==1.5.3 (from -r requirements.txt (line 27))
+#11 27.97   Downloading joblib-1.5.3-py3-none-any.whl.metadata (5.5 kB)
+#11 28.39 Collecting kombu==5.6.2 (from -r requirements.txt (line 28))
+#11 28.47   Downloading kombu-5.6.2-py3-none-any.whl.metadata (3.5 kB)
+#11 28.67 Collecting lightgbm==4.6.0 (from -r requirements.txt (line 29))
+#11 28.87   Downloading lightgbm-4.6.0-py3-none-manylinux_2_28_x86_64.whl.metadata (17 kB)
+#11 29.03 Collecting loguru==0.7.2 (from -r requirements.txt (line 30))
+#11 29.07   Downloading loguru-0.7.2-py3-none-any.whl.metadata (23 kB)
+#11 29.86 Collecting narwhals==2.24.0 (from -r requirements.txt (line 31))
+#11 29.90   Downloading narwhals-2.24.0-py3-none-any.whl.metadata (15 kB)
+#11 33.69 ERROR: Ignored the following yanked versions: 2.4.0
+#11 33.69 ERROR: Ignored the following versions that require a different python version: 1.21.2 Requires-Python >=3.7,<3.11; 1.21.3 Requires-Python >=3.7,<3.11; 1.21.4 Requires-Python >=3.7,<3.11; 1.21.5 Requires-Python >=3.7,<3.11; 1.21.6 Requires-Python >=3.7,<3.11; 2.5.0 Requires-Python >=3.12; 2.5.0rc1 Requires-Python >=3.12; 2.5.1 Requires-Python >=3.12; 2.5.2 Requires-Python >=3.12
+#11 33.69 ERROR: Could not find a version that satisfies the requirement numpy==2.5.1 (from versions: 1.3.0, 1.4.1, 1.5.0, 1.5.1, 1.6.0, 1.6.1, 1.6.2, 1.7.0, 1.7.1, 1.7.2, 1.8.0, 1.8.1, 1.8.2, 1.9.0, 1.9.1, 1.9.2, 1.9.3, 1.10.0.post2, 1.10.1, 1.10.2, 1.10.4, 1.11.0, 1.11.1, 1.11.2, 1.11.3, 1.12.0, 1.12.1, 1.13.0, 1.13.1, 1.13.3, 1.14.0, 1.14.1, 1.14.2, 1.14.3, 1.14.4, 1.14.5, 1.14.6, 1.15.0, 1.15.1, 1.15.2, 1.15.3, 1.15.4, 1.16.0, 1.16.1, 1.16.2, 1.16.3, 1.16.4, 1.16.5, 1.16.6, 1.17.0, 1.17.1, 1.17.2, 1.17.3, 1.17.4, 1.17.5, 1.18.0, 1.18.1, 1.18.2, 1.18.3, 1.18.4, 1.18.5, 1.19.0, 1.19.1, 1.19.2, 1.19.3, 1.19.4, 1.19.5, 1.20.0, 1.20.1, 1.20.2, 1.20.3, 1.21.0, 1.21.1, 1.22.0, 1.22.1, 1.22.2, 1.22.3, 1.22.4, 1.23.0, 1.23.1, 1.23.2, 1.23.3, 1.23.4, 1.23.5, 1.24.0, 1.24.1, 1.24.2, 1.24.3, 1.24.4, 1.25.0, 1.25.1, 1.25.2, 1.26.0, 1.26.1, 1.26.2, 1.26.3, 1.26.4, 2.0.0, 2.0.1, 2.0.2, 2.1.0, 2.1.1, 2.1.2, 2.1.3, 2.2.0, 2.2.1, 2.2.2, 2.2.3, 2.2.4, 2.2.5, 2.2.6, 2.3.0, 2.3.1, 2.3.2, 2.3.3, 2.3.4, 2.3.5, 2.4.0rc1, 2.4.1, 2.4.2, 2.4.3, 2.4.4, 2.4.5, 2.4.6)
+#11 33.69 ERROR: No matching distribution found for numpy==2.5.1
+#11 ERROR: process "/bin/sh -c pip install --no-cache-dir --upgrade pip     && pip install --no-cache-dir -r requirements.txt" did not complete successfully: exit code: 1
+------
+ > [5/7] RUN pip install --no-cache-dir --upgrade pip     && pip install --no-cache-dir -r requirements.txt:
+28.67 Collecting lightgbm==4.6.0 (from -r requirements.txt (line 29))
+28.87   Downloading lightgbm-4.6.0-py3-none-manylinux_2_28_x86_64.whl.metadata (17 kB)
+29.03 Collecting loguru==0.7.2 (from -r requirements.txt (line 30))
+29.07   Downloading loguru-0.7.2-py3-none-any.whl.metadata (23 kB)
+29.86 Collecting narwhals==2.24.0 (from -r requirements.txt (line 31))
+29.90   Downloading narwhals-2.24.0-py3-none-any.whl.metadata (15 kB)
+33.69 ERROR: Ignored the following yanked versions: 2.4.0
+33.69 ERROR: Ignored the following versions that require a different python version: 1.21.2 Requires-Python >=3.7,<3.11; 1.21.3 Requires-Python >=3.7,<3.11; 1.21.4 Requires-Python >=3.7,<3.11; 1.21.5 Requires-Python >=3.7,<3.11; 1.21.6 Requires-Python >=3.7,<3.11; 2.5.0 Requires-Python >=3.12; 2.5.0rc1 Requires-Python >=3.12; 2.5.1 Requires-Python >=3.12; 2.5.2 Requires-Python >=3.12
+33.69 ERROR: Could not find a version that satisfies the requirement numpy==2.5.1 (from versions: 1.3.0, 1.4.1, 1.5.0, 1.5.1, 1.6.0, 1.6.1, 1.6.2, 1.7.0, 1.7.1, 1.7.2, 1.8.0, 1.8.1, 1.8.2, 1.9.0, 1.9.1, 1.9.2, 1.9.3, 1.10.0.post2, 1.10.1, 1.10.2, 1.10.4, 1.11.0, 1.11.1, 1.11.2, 1.11.3, 1.12.0, 1.12.1, 1.13.0, 1.13.1, 1.13.3, 1.14.0, 1.14.1, 1.14.2, 1.14.3, 1.14.4, 1.14.5, 1.14.6, 1.15.0, 1.15.1, 1.15.2, 1.15.3, 1.15.4, 1.16.0, 1.16.1, 1.16.2, 1.16.3, 1.16.4, 1.16.5, 1.16.6, 1.17.0, 1.17.1, 1.17.2, 1.17.3, 1.17.4, 1.17.5, 1.18.0, 1.18.1, 1.18.2, 1.18.3, 1.18.4, 1.18.5, 1.19.0, 1.19.1, 1.19.2, 1.19.3, 1.19.4, 1.19.5, 1.20.0, 1.20.1, 1.20.2, 1.20.3, 1.21.0, 1.21.1, 1.22.0, 1.22.1, 1.22.2, 1.22.3, 1.22.4, 1.23.0, 1.23.1, 1.23.2, 1.23.3, 1.23.4, 1.23.5, 1.24.0, 1.24.1, 1.24.2, 1.24.3, 1.24.4, 1.25.0, 1.25.1, 1.25.2, 1.26.0, 1.26.1, 1.26.2, 1.26.3, 1.26.4, 2.0.0, 2.0.1, 2.0.2, 2.1.0, 2.1.1, 2.1.2, 2.1.3, 2.2.0, 2.2.1, 2.2.2, 2.2.3, 2.2.4, 2.2.5, 2.2.6, 2.3.0, 2.3.1, 2.3.2, 2.3.3, 2.3.4, 2.3.5, 2.4.0rc1, 2.4.1, 2.4.2, 2.4.3, 2.4.4, 2.4.5, 2.4.6)
+33.69 ERROR: No matching distribution found for numpy==2.5.1
+------
+Dockerfile:13
+
+--------------------
+
+  12 |     
+
+  13 | >>> RUN pip install --no-cache-dir --upgrade pip \
+
+  14 | >>>     && pip install --no-cache-dir -r requirements.txt
+
+  15 |     
+
+--------------------
+
+failed to solve: process "/bin/sh -c pip install --no-cache-dir --upgrade pip     && pip install --no-cache-dir -r requirements.txt" did not complete successfully: exit code: 1
+

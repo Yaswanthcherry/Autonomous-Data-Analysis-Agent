@@ -19,7 +19,7 @@ interface AnomalyData {
 }
 
 export function AnomalyCard({ anomalies }: { anomalies: AnomalyData }) {
-  if (!anomalies || anomalies.method === "none") {
+  if (!anomalies) {
     return (
       <div className="bg-white rounded-xl border border-gray-200 p-6 text-center text-gray-400 text-sm">
         No numeric columns found for anomaly detection.
