@@ -19,13 +19,14 @@ from loguru import logger
 from agents.schemas import PlannerInput, PlannerOutput
 
 
-# Keywords that strongly indicate the target column
-_TARGET_KEYWORDS: frozenset[str] = frozenset({
-    "target", "label", "class", "outcome", "y", "result",
+# Ordered from strongest semantic signal to fallback keywords. A tuple is
+# intentional: iterating a frozenset made target selection nondeterministic.
+_TARGET_KEYWORDS: tuple[str, ...] = (
+    "target", "label", "class", "outcome", "result", "y",
     "churn", "status", "survived", "default", "fraud",
     "price", "salary", "revenue", "sales", "cost", "score",
     "rating", "value", "demand", "quantity",
-})
+)
 
 # Keywords that indicate time-series datasets
 _DATETIME_TARGET_KEYWORDS: frozenset[str] = frozenset({
@@ -67,25 +68,22 @@ class PlannerAgent:
     def _detect_target(self, df: pd.DataFrame) -> str | None:
         """
         Target detection priority:
-        1. Exact keyword match (case-insensitive)
-        2. Last column (conventional fallback)
+        1. Explicit target/label/class/outcome columns
+        2. Other known target-like names
+        3. Last-column fallback
         """
-        cols_lower = {c.lower(): c for c in df.columns}
+        cols_lower = {str(c).lower(): c for c in df.columns}
         for kw in _TARGET_KEYWORDS:
             if kw in cols_lower:
                 return cols_lower[kw]
-        # Fallback: last column
         return df.columns[-1] if len(df.columns) > 0 else None
 
     def _detect_task_type(self, df: pd.DataFrame, target: str | None) -> str:
-        """
-        Detect: classification | regression | clustering | time_series
-        """
-        # Time-series: any datetime column or datetime-named column
+        """Detect classification, regression, clustering, or time series."""
         dt_cols = df.select_dtypes(include=["datetime64"]).columns.tolist()
         dt_named = [
             c for c in df.columns
-            if any(kw in c.lower() for kw in _DATETIME_TARGET_KEYWORDS)
+            if any(kw in str(c).lower() for kw in _DATETIME_TARGET_KEYWORDS)
         ]
         if dt_cols or dt_named:
             return "time_series"
@@ -94,41 +92,30 @@ class PlannerAgent:
             return "clustering"
 
         col = df[target]
-
-        # No target variance → clustering
         if col.nunique() <= 1:
             return "clustering"
 
-        # Numeric with many unique values → regression
         if pd.api.types.is_numeric_dtype(col):
             ratio = col.nunique() / max(len(col), 1)
             if col.nunique() > 20 or ratio > 0.05:
                 return "regression"
             return "classification"
 
-        # Categorical / boolean → classification
         return "classification"
 
     def _recommend_steps(
         self, df: pd.DataFrame, task_type: str, target: str | None
     ) -> list[str]:
         steps: list[str] = ["profile_dataset", "clean_data", "detect_anomalies", "run_eda"]
-
-        # Visualization always included
         steps.append("generate_visualizations")
 
-        # Statistical analysis
         num_count = len(df.select_dtypes(include=[np.number]).columns)
         if num_count >= 2:
             steps.append("statistical_analysis")
 
-        # ML only if we have a target and enough rows
         if task_type in ("classification", "regression") and target and len(df) >= 20:
-            steps.append("train_ml_models")
-            steps.append("compare_models")
-            steps.append("select_best_model")
+            steps.extend(["train_ml_models", "compare_models", "select_best_model"])
 
-        # Always generate insights + report
         steps.extend([
             "generate_ai_findings",
             "generate_feature_recommendations",

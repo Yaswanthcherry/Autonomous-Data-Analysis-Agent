@@ -1,12 +1,13 @@
 """
-Test configuration — uses SQLite in-memory via aiosqlite
+Test configuration — uses SQLite in-memory via aiosqlite.
 """
-import pytest
 import pytest_asyncio
 from httpx import AsyncClient, ASGITransport
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy.pool import StaticPool
+
 from core.database import get_db, Base
+import models  # Import model package so all tables register in Base.metadata.
 
 TEST_DATABASE_URL = "sqlite+aiosqlite:///:memory:"
 
@@ -42,7 +43,6 @@ async def setup_db():
 
 @pytest_asyncio.fixture
 async def client():
-    # Import app here to avoid circular import issues during setup
     from main import app
     app.dependency_overrides[get_db] = override_get_db
     async with AsyncClient(

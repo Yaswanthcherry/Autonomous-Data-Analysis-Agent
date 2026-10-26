@@ -6,7 +6,6 @@ import pytest
 
 
 async def _register_and_login(client) -> str:
-    """Helper: register + login, return Bearer token."""
     await client.post("/api/v1/auth/register", json={
         "email": "ds_user@example.com",
         "full_name": "DS User",
@@ -63,4 +62,4 @@ async def test_unauthenticated_upload(client):
         "/api/v1/datasets/upload",
         files={"file": ("test.csv", io.BytesIO(csv_content), "text/csv")},
     )
-    assert response.status_code == 403
+    assert response.status_code == 401

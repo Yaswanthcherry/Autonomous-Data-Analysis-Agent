@@ -27,8 +27,8 @@ class DataCleaner:
         if dropped:
             report["actions"].append({"action": "drop_duplicates", "count": dropped})
 
-        # Try to parse datetime columns (infer_datetime_format removed in pandas 2.0)
-        for col in df.select_dtypes(include="object").columns:
+        # Try to parse datetime columns
+        for col in df.select_dtypes(include=["object", "str"]).columns:
             try:
                 with warnings.catch_warnings():
                     warnings.simplefilter("ignore", UserWarning)
@@ -36,35 +36,38 @@ class DataCleaner:
                 if parsed.notna().sum() > 0.8 * len(df):
                     df[col] = parsed
                     report["actions"].append({"action": "parse_datetime", "column": col})
-            except Exception:
-                pass
+            except (TypeError, ValueError):
+                # A failed date parse should leave the original values untouched.
+                continue
 
-        # Fill numeric nulls with median
+        # Fill numeric nulls with median. Assign the result back to the column;
+        # Series.fillna(..., inplace=True) does not update parent DataFrames
+        # reliably with pandas Copy-on-Write.
         num_cols = df.select_dtypes(include=[np.number]).columns.tolist()
         for col in num_cols:
-            n_null = df[col].isnull().sum()
+            n_null = int(df[col].isnull().sum())
             if n_null > 0:
                 median_val = df[col].median()
-                df[col].fillna(median_val, inplace=True)
+                df[col] = df[col].fillna(median_val)
                 report["actions"].append({
                     "action": "fill_numeric_null",
                     "column": col,
-                    "filled": int(n_null),
-                    "value": round(float(median_val), 4),
+                    "filled": n_null,
+                    "value": round(float(median_val), 4) if pd.notna(median_val) else None,
                 })
 
-        # Fill categorical nulls with mode
-        cat_cols = df.select_dtypes(include="object").columns.tolist()
+        # Fill categorical nulls with mode.
+        cat_cols = df.select_dtypes(include=["object", "str", "category"]).columns.tolist()
         for col in cat_cols:
-            n_null = df[col].isnull().sum()
+            n_null = int(df[col].isnull().sum())
             if n_null > 0:
                 mode_val = df[col].mode()
                 fill_val = mode_val.iloc[0] if not mode_val.empty else "Unknown"
-                df[col].fillna(fill_val, inplace=True)
+                df[col] = df[col].fillna(fill_val)
                 report["actions"].append({
                     "action": "fill_categorical_null",
                     "column": col,
-                    "filled": int(n_null),
+                    "filled": n_null,
                     "value": str(fill_val),
                 })
 

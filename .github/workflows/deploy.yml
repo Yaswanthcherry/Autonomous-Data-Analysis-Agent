@@ -5,11 +5,30 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Validate deployment secrets
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          PRODUCTION_HOST: ${{ secrets.PRODUCTION_HOST }}
+          PRODUCTION_USER: ${{ secrets.PRODUCTION_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          set -eu
+          for name in DOCKER_USERNAME DOCKER_PASSWORD PRODUCTION_HOST PRODUCTION_USER SSH_PRIVATE_KEY; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Required GitHub Actions secret $name is missing or empty."
+              exit 1
+            fi
+          done
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -26,8 +45,6 @@ jobs:
           context: ./backend
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/ai-analyst-backend:latest
-          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/ai-analyst-backend:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/ai-analyst-backend:buildcache,mode=max
 
       - name: Build and push frontend
         uses: docker/build-push-action@v5
@@ -35,17 +52,23 @@ jobs:
           context: ./frontend
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/ai-analyst-frontend:latest
-          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/ai-analyst-frontend:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/ai-analyst-frontend:buildcache,mode=max
 
       - name: Deploy to production
         uses: appleboy/ssh-action@v1.0.0
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
         with:
           host: ${{ secrets.PRODUCTION_HOST }}
           username: ${{ secrets.PRODUCTION_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: DOCKERHUB_USERNAME,DOCKERHUB_TOKEN
           script: |
+            set -eu
             cd /opt/ai-analyst
+            printf '%s' "$DOCKERHUB_TOKEN" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
+            export DOCKERHUB_USERNAME
             docker-compose pull
-            docker-compose up -d
-            docker-compose exec backend alembic upgrade head
+            docker-compose up -d --no-build
+            docker-compose exec -T backend alembic upgrade head
+            docker logout
