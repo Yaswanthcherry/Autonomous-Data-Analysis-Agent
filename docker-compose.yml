@@ -1,44 +1,31 @@
-
-
 services:
-
   redis:
     image: redis:7-alpine
     restart: always
-
     ports:
       - "6379:6379"
-
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-
-    image: analysisagent-backend:latest
-
+    image: ${DOCKERHUB_USERNAME:-local}/ai-analyst-backend:latest
     restart: always
-
     env_file:
       - ./backend/.env
-
     volumes:
       - uploads_data:/app/uploads
       - analyst_data:/app/data
-
     ports:
       - "8000:8000"
-
     depends_on:
       redis:
         condition: service_healthy
-
     command: uvicorn main:app --host 0.0.0.0 --port 8000
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
@@ -47,41 +34,31 @@ services:
       retries: 3
       start_period: 20s
 
-
   celery_worker:
-    image: analysisagent-backend:latest
-
+    image: ${DOCKERHUB_USERNAME:-local}/ai-analyst-backend:latest
     restart: always
-
     env_file:
       - ./backend/.env
-
     volumes:
       - uploads_data:/app/uploads
       - analyst_data:/app/data
-
     depends_on:
       redis:
         condition: service_healthy
       backend:
         condition: service_started
-
     command: celery -A tasks.celery_app:celery_app worker --loglevel=info --concurrency=2
-
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-
+    image: ${DOCKERHUB_USERNAME:-local}/ai-analyst-frontend:latest
     restart: always
-
     env_file:
       - ./.env
-
     ports:
       - "3000:3000"
-
     depends_on:
       - backend
     healthcheck:
@@ -91,21 +68,16 @@ services:
       retries: 3
       start_period: 20s
 
-
   nginx:
     image: nginx:alpine
     restart: always
-
     ports:
       - "80:80"
-
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-
     depends_on:
       - frontend
       - backend
-
 
 volumes:
   uploads_data:
